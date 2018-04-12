@@ -11,7 +11,20 @@ Garden universe renders a Kubernetes landscape which is setup and managed by the
 
 To locally run the garden universe
 ```
-git clone https://github.com/afritzler/garden-universe
+git clone https://github.com/afritzler/garden-universe $GOPATH/src/github.com/afritzler/garden-universe
+cd $GOPATH/src/github.com/afritzler/garden-universe
 go run *.go serve --kubeconfig=PATH_TO_MY_GARDEN_CLUSTER_KUBECONFIG
 ```
 The web UI can be accessed via http://localhost:3000
+
+To build the executable run
+```
+cd $GOPATH/src/github.com/afritzler/garden-universe
+make
+```
+
+To build the Docker image
+```
+cd $GOPATH/src/github.com/afritzler/garden-universe
+make docker-build
+```
