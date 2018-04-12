@@ -2,7 +2,7 @@
 <head>
     <style> body { margin: 0; } </style>
   
-    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="/js/3d-force-graph.min.js"></script>
   </head>
   
   <body>
@@ -24,14 +24,14 @@
           .linkWidth(1)
           .linkDirectionalParticles(10)
           .numDimensions(3)
-          .linkDirectionalParticleSpeed(0.01)
+          .linkDirectionalParticleSpeed(0.005)
           .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
           .onNodeClick(node => {
             // Aim at node from outside it
             const distance = 40;
             const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
             Graph.cameraPosition(
-              { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+              { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, 
               node, // lookAt ({ x, y, z })
               3000  // ms transition duration
             );
