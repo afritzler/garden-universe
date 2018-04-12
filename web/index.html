@@ -1,0 +1,40 @@
+
+<head>
+    <style> body { margin: 0; } </style>
+  
+    <script src="//unpkg.com/3d-force-graph"></script>
+  </head>
+  
+  <body>
+    <div id="3d-graph"></div>
+  
+    <script>
+      const elem = document.getElementById('3d-graph');
+      const Graph = ForceGraph3D()
+        (elem)
+          .jsonUrl('/graph')
+          .nodeLabel('id')
+          .nodeAutoColorBy(function(n){
+            if (n.Seed) {
+              return "seed"
+            }
+            return "shoot-" + n.Project
+          })
+          .linkAutoColorBy('value')
+          .linkWidth(1)
+          .linkDirectionalParticles(10)
+          .numDimensions(3)
+          .linkDirectionalParticleSpeed(0.01)
+          .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+          .onNodeClick(node => {
+            // Aim at node from outside it
+            const distance = 40;
+            const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+            Graph.cameraPosition(
+              { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+              node, // lookAt ({ x, y, z })
+              3000  // ms transition duration
+            );
+          });
+    </script>
+  </body>
