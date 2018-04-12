@@ -1,4 +1,3 @@
-# garden-universe
 ![garden universe logo](images/logo.png)
 ---
 
