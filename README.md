@@ -7,19 +7,21 @@ Garden universe renders a Kubernetes landscape which is setup and managed by the
 
 # Development
 
-To locally run the garden universe
+To build and run the garden universe
 ```
 git clone https://github.com/afritzler/garden-universe $GOPATH/src/github.com/afritzler/garden-universe
 cd $GOPATH/src/github.com/afritzler/garden-universe
 go run *.go serve --kubeconfig=PATH_TO_MY_GARDEN_CLUSTER_KUBECONFIG
 ```
-The web UI can be accessed via http://localhost:3000
 
-To build the executable run
+or to run it using the executable
 ```
-cd $GOPATH/src/github.com/afritzler/garden-universe
 make
+./garden-universe serve --kubeconfig=PATH_TO_MY_GARDEN_CLUSTER_KUBECONFIG
 ```
+
+The web UI can be accessed via http://localhost:3000 and the rendered graph under http://localhost:3000/graph.
+With `--port` you can also specify under which port the garden universe server should be exposed (default is 3000).
 
 To build the Docker image
 ```
@@ -28,4 +30,4 @@ make docker-build
 ```
 
 # Acknowledgements
-Gardener universe is using the [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 
+Garden universe is using the [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 

@@ -16,7 +16,9 @@ package pkg
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
+	"os"
 
 	bg "github.com/afritzler/garden-universe/pkg/types"
 	gardenclientset "github.com/gardener/gardener/pkg/client/garden/clientset/versioned"
@@ -28,12 +30,14 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
-		panic(err.Error())
+		fmt.Printf("failed to load kubeconfig: %s\n", err)
+		os.Exit(1)
 	}
 
 	gardenset, err := gardenclientset.NewForConfig(config)
 	if err != nil {
-		panic(err.Error())
+		fmt.Printf("failed to create garden client: %s\n", err)
+		os.Exit(1)
 	}
 
 	nodes := make(map[string]*bg.Node)
@@ -41,11 +45,13 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 
 	shoots, err := gardenset.GardenV1beta1().Shoots("").List(metav1.ListOptions{})
 	if err != nil {
-		panic(err.Error())
+		fmt.Printf("failed to get shoots: %s\n", err)
+		os.Exit(1)
 	}
 	seeds, err := gardenset.GardenV1beta1().Seeds().List(metav1.ListOptions{})
 	if err != nil {
-		panic(err.Error())
+		fmt.Printf("failed to get seeds: %s\n", err)
+		os.Exit(1)
 	}
 	// populate seeds
 	for _, s := range seeds.Items {
