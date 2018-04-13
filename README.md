@@ -21,7 +21,7 @@ make
 ```
 
 The web UI can be accessed via http://localhost:3000 and the rendered graph under http://localhost:3000/graph.
-With `--port` you can also specify under which port the garden universe server should be exposed (default is 3000).
+With the `--port` flag you can also specify under which port the garden universe server should be exposed (default is 3000).
 
 To build the Docker image
 ```
@@ -30,4 +30,4 @@ make docker-build
 ```
 
 # Acknowledgements
-Garden universe is using the [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 
+Garden universe is using [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 
