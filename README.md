@@ -3,9 +3,7 @@
 ---
 
 # Overview
-Garden universe renders a Kubernetes landscape which is setup and managed by the [Gardener Project](https://github.com/gardener/gardener) into a dynamic 3D graph.
-
-![garden universe](images/universe.png)
+Garden universe renders a Kubernetes landscape which is setup and managed by the [Gardener Project](https://github.com/gardener/gardener) into a dynamic 3D graph. An example landscape redering can be found [here](images/universe.png).
 
 # Development
 
