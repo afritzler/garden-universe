@@ -26,3 +26,6 @@ To build the Docker image
 cd $GOPATH/src/github.com/afritzler/garden-universe
 make docker-build
 ```
+
+# Acknowledgements
+Gardener universe is using the [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 
