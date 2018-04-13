@@ -25,15 +25,9 @@ import (
 // renderCmd represents the render command
 var renderCmd = &cobra.Command{
 	Use:   "render",
-	Short: "Render",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Renders the landscape graph as JSON",
+	Long:  `Renders the landscape graph into JSON format and prints it out to stdout.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//fmt.Println("render called")
 		render()
 	},
 }
@@ -49,5 +43,5 @@ func render() {
 		fmt.Printf("failed to render landscape graph %s", err)
 		os.Exit(1)
 	}
-	fmt.Printf("%s", data)
+	fmt.Printf("%s\n", data)
 }
