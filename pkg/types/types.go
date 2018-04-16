@@ -20,8 +20,10 @@ type Graph struct {
 
 type Node struct {
 	Id      string `json:"id"`
-	Project string `json:string`
-	Seed    bool   `json:boolean`
+	Project string `json:"project"`
+	Name    string `json:"name"`
+	Seed    bool   `json:"seed"`
+	Status  string `json:"status,omitempty"`
 }
 
 type Link struct {

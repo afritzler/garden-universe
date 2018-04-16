@@ -1,7 +1,8 @@
 
 <head>
     <style> body { margin: 0; } </style>
-  
+    <script src="/js/three.js"></script>
+
     <script src="/js/3d-force-graph.min.js"></script>
   </head>
   
@@ -13,17 +14,46 @@
       const Graph = ForceGraph3D()
         (elem)
           .jsonUrl('/graph')
-          .nodeLabel('id')
+          .nodeLabel(function(n){
+            if (n.hasOwnProperty('status')) {
+              return n.name + '<br/>' + n.status
+            } else {
+              return n.name
+            }
+          })
+          .nodeOpacity(1)
           .nodeAutoColorBy(function(n){
-            if (n.Seed) {
+            if (n.seed) {
               return "seed"
             }
-            return "shoot-" + n.Project
+            return "shoot-" + n.project
+          })
+          .nodeVal(function(n){
+            if (n.seed) {
+              return 3
+            }
+            return 0.5
+          })
+          .nodeThreeObject(function(n){
+            if (n.hasOwnProperty('status')) {
+              var mesh = new THREE.Mesh(
+                //new Date().getTime()/1000 % 2 ? new THREE.DodecahedronGeometry(5) : new THREE.SphereGeometry(5),
+                new THREE.DodecahedronGeometry(10),
+                new THREE.MeshLambertMaterial({
+                  color: Math.round(Math.random() * Math.pow(2, 24)),
+                  transparent: false,
+                  opacity: 1
+              }))
+              // mesh.geometry.dynamic = true;
+              // mesh.geometry.verticesNeedUpdate = true;
+              return mesh
+            }
           })
           .linkAutoColorBy('value')
-          .linkWidth(1)
+          .linkWidth(0.5)
           .linkDirectionalParticles(10)
           .numDimensions(3)
+          .nodeResolution(15)
           .linkDirectionalParticleSpeed(0.005)
           .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
           .onNodeClick(node => {
@@ -38,3 +68,5 @@
           });
     </script>
   </body>
+
+  

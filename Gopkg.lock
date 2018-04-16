@@ -214,7 +214,7 @@
     "idna",
     "lex/httplex"
   ]
-  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
+  revision = "500e7a4f953ddaf55d316b4d3adc516aa0379622"
 
 [[projects]]
   branch = "master"
@@ -223,7 +223,7 @@
     "unix",
     "windows"
   ]
-  revision = "3b87a42e500a6dc65dae1a55d0b641295971163e"
+  revision = "2281fa97ef7b0c26324634d5a22f04babdac8713"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -250,7 +250,7 @@
   branch = "master"
   name = "golang.org/x/time"
   packages = ["rate"]
-  revision = "26559e0f760e39c24d730d3224364aef164ee23f"
+  revision = "fbb02b2291d28baffd63558aa44b4b56f178d650"
 
 [[projects]]
   name = "gopkg.in/inf.v0"

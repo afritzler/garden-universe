@@ -53,21 +53,28 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 		fmt.Printf("failed to get seeds: %s\n", err)
 		os.Exit(1)
 	}
+
 	// populate seeds
 	for _, s := range seeds.Items {
-		nodes[s.GetObjectMeta().GetName()] = &bg.Node{Id: s.GetObjectMeta().GetName(), Project: "", Seed: true}
+		nodeName := fmt.Sprintf("%s/%s", "seed", s.GetObjectMeta().GetName())
+		nodes[s.GetObjectMeta().GetName()] = &bg.Node{Id: s.GetObjectMeta().GetName(), Project: "", Name: nodeName, Seed: true}
 	}
 
 	// populate nodes
 	for _, s := range shoots.Items {
 		shootname := s.GetObjectMeta().GetName()
+		nodeName := fmt.Sprintf("%s/%s", s.GetObjectMeta().GetNamespace(), s.GetObjectMeta().GetName())
 		node, ok := nodes[shootname]
+		status := ""
+		if s.Status.LastError != nil {
+			status = s.Status.LastError.Description
+		}
 		v := 0
 		if ok {
 			node.Project = s.GetObjectMeta().GetNamespace()
 			v = 1
 		} else {
-			nodes[shootname] = &bg.Node{Id: shootname, Project: s.GetObjectMeta().GetNamespace(), Seed: false}
+			nodes[shootname] = &bg.Node{Id: shootname, Project: s.GetObjectMeta().GetNamespace(), Name: nodeName, Seed: false, Status: status}
 		}
 		links = append(links, bg.Link{Source: shootname, Target: *s.Spec.Cloud.Seed, Value: v})
 	}
