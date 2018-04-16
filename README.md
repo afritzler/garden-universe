@@ -29,5 +29,11 @@ cd $GOPATH/src/github.com/afritzler/garden-universe
 make docker-build
 ```
 
+# Ideas and TODOs
+
+* kubectl access to a corresponding cluster
+* show detailed information of a cluster
+* plug in and display metrics
+
 # Acknowledgements
 Garden universe is using [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 
