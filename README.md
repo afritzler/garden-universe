@@ -11,13 +11,13 @@ To build and run the garden universe
 ```
 git clone https://github.com/afritzler/garden-universe $GOPATH/src/github.com/afritzler/garden-universe
 cd $GOPATH/src/github.com/afritzler/garden-universe
-go run *.go serve --kubeconfig=PATH_TO_MY_GARDEN_CLUSTER_KUBECONFIG
+go run *.go serve --kubeconfig=PATH_TO_MY_GARDENER_CLUSTER_KUBECONFIG
 ```
 
 or to run it using the executable
 ```
 make
-./garden-universe serve --kubeconfig=PATH_TO_MY_GARDEN_CLUSTER_KUBECONFIG
+./garden-universe serve --kubeconfig=PATH_TO_MY_GARDENER_CLUSTER_KUBECONFIG
 ```
 
 The web UI can be accessed via http://localhost:3000 and the rendered graph under http://localhost:3000/graph.
