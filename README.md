@@ -5,6 +5,12 @@
 # Overview
 Garden universe renders a Kubernetes landscape which is setup and managed by the [Gardener Project](https://github.com/gardener/gardener) into a dynamic 3D graph. An example landscape visualization can be found [here](images/universe.png).
 
+# Features
+* 3D landscape overview
+* Seed <-> shoot relationship 
+* Identify shoot clusters with errors
+* Show latest error message for a shoot
+
 # Development
 
 To build and run the garden universe
