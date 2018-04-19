@@ -1,4 +1,4 @@
-// Copyright 2018 The Gardener Authors.
+// Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the LICENSE file
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,9 +27,15 @@ func addDefaultingFuncs(scheme *runtime.Scheme) error {
 func SetDefaults_Shoot(obj *Shoot) {
 	if obj.Spec.Backup == nil {
 		obj.Spec.Backup = &Backup{
-			IntervalInSecond: DefaultETCDBackupIntervalSeconds,
-			Maximum:          DefaultETCDBackupMaximum,
+			Schedule: DefaultETCDBackupSchedule,
+			Maximum:  DefaultETCDBackupMaximum,
 		}
+	}
+	if len(obj.Spec.Backup.Schedule) == 0 {
+		obj.Spec.Backup.Schedule = DefaultETCDBackupSchedule
+	}
+	if obj.Spec.Backup.Maximum == 0 {
+		obj.Spec.Backup.Maximum = DefaultETCDBackupMaximum
 	}
 
 	var (
@@ -83,6 +89,18 @@ func SetDefaults_Shoot(obj *Shoot) {
 		}
 		if cloud.OpenStack.Networks.Nodes == nil {
 			obj.Spec.Cloud.OpenStack.Networks.Nodes = &cloud.OpenStack.Networks.Workers[0]
+		}
+	}
+
+	if cloud.Local != nil {
+		if cloud.Local.Networks.Pods == nil {
+			obj.Spec.Cloud.Local.Networks.Pods = &defaultPodCIDR
+		}
+		if cloud.Local.Networks.Services == nil {
+			obj.Spec.Cloud.Local.Networks.Services = &defaultServiceCIDR
+		}
+		if cloud.Local.Networks.Nodes == nil {
+			obj.Spec.Cloud.Local.Networks.Nodes = &cloud.Local.Networks.Workers[0]
 		}
 	}
 

@@ -14,6 +14,7 @@
   version = "v1.4.7"
 
 [[projects]]
+  branch = "master"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -24,8 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "b041e3153d0b398e83bd8c21cebf5c1092755f20"
-  version = "0.2.0"
+  revision = "329dda100b9fa88eab708dfd06cf2cfee6dc8fcd"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -215,7 +215,7 @@
     "idna",
     "lex/httplex"
   ]
-  revision = "84348c2dc81a524fe94aaea3e3d9f967135338ef"
+  revision = "d41e8174641f662c5a2d1c7a5f9e828788eb8706"
 
 [[projects]]
   branch = "master"
@@ -224,7 +224,7 @@
     "unix",
     "windows"
   ]
-  revision = "b126b21c05a91c856b027c16779c12e3bf236954"
+  revision = "3ccc7e5779793fd54564baf60c51bf017955e0ba"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -366,12 +366,12 @@
     "util/homedir",
     "util/integer"
   ]
-  revision = "23781f4d6632d88e869066eaebb743857aa1ef9b"
-  version = "v7.0.0"
+  revision = "989be4278f353e42f26c416c53757d16fcff77db"
+  version = "kubernetes-1.10.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d73f01a2da9237ae668570b60378bc06e6b39b73789d0f9943168c9b55ed1bda"
+  inputs-digest = "13025e7a3fef17db227e0062126deafe5e34acddeba079e9eb51bc05f850bd61"
   solver-name = "gps-cdcl"
   solver-version = 1

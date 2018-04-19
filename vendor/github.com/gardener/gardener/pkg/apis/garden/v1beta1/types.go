@@ -1,4 +1,4 @@
-// Copyright 2018 The Gardener Authors.
+// Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the LICENSE file
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -67,9 +67,9 @@ type CloudProfileSpec struct {
 	// OpenStack is the profile specification for the OpenStack cloud.
 	// +optional
 	OpenStack *OpenStackProfile `json:"openstack,omitempty"`
-	// Vagrant is the profile specification for the Vagrant provider.
+	// Local is the profile specification for the Local provider.
 	// +optional
-	Vagrant *VagrantProfile `json:"vagrant,omitempty"`
+	Local *LocalProfile `json:"local,omitempty"`
 	// CABundle is a certificate bundle which will be installed onto every host machine of the Shoot cluster.
 	// +optional
 	CABundle *string `json:"caBundle,omitempty"`
@@ -206,6 +206,10 @@ type OpenStackProfile struct {
 	// DNSServers is a list of IPs of DNS servers used while creating subnets.
 	// +optional
 	DNSServers []string `json:"dnsServers,omitempty"`
+	// DHCPDomain is the dhcp domain of the OpenStack system configured in nova.conf. Only meaningful for
+	// Kubernetes 1.10.1+. See https://github.com/kubernetes/kubernetes/pull/61890 for details.
+	// +optional
+	DHCPDomain *string `json:"dhcpDomain,omitempty"`
 }
 
 // OpenStackConstraints is an object containing constraints for certain values in the Shoot specification.
@@ -246,14 +250,14 @@ type OpenStackMachineImage struct {
 	Image string `json:"image"`
 }
 
-// VagrantProfile defines constraints and definitions for the Vagrant local development.
-type VagrantProfile struct {
+// LocalProfile defines constraints and definitions for the local development.
+type LocalProfile struct {
 	// Constraints is an object containing constraints for certain values in the Shoot specification.
-	Constraints VagrantConstraints `json:"constraints"`
+	Constraints LocalConstraints `json:"constraints"`
 }
 
-// VagrantConstraints is an object containing constraints for certain values in the Shoot specification.
-type VagrantConstraints struct {
+// LocalConstraints is an object containing constraints for certain values in the Shoot specification.
+type LocalConstraints struct {
 	// DNSProviders contains constraints regarding allowed values of the 'dns.provider' block in the Shoot specification.
 	DNSProviders []DNSProviderConstraint `json:"dnsProviders"`
 }
@@ -359,7 +363,7 @@ type SeedSpec struct {
 	IngressDomain string `json:"ingressDomain"`
 	// SecretRef is a reference to a Secret object containing the Kubeconfig and the cloud provider credentials for
 	// the account the Seed cluster has been deployed to.
-	SecretRef corev1.ObjectReference `json:"secretRef"`
+	SecretRef corev1.SecretReference `json:"secretRef"`
 	// Networks defines the pod, service and worker network of the Seed cluster.
 	Networks SeedNetworks `json:"networks"`
 	// Visible labels the Seed cluster as selectable for the seedfinder admisson controller.
@@ -458,7 +462,7 @@ type SecretBinding struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// SecretRef is a reference to a secret object in the same or another namespace.
-	SecretRef corev1.ObjectReference `json:"secretRef"`
+	SecretRef corev1.SecretReference `json:"secretRef"`
 	// Quotas is a list of references to Quota objects in the same or another namespace.
 	// +optional
 	Quotas []corev1.ObjectReference `json:"quotas,omitempty"`
@@ -583,9 +587,9 @@ type Cloud struct {
 	// OpenStack contains the Shoot specification for the OpenStack cloud.
 	// +optional
 	OpenStack *OpenStackCloud `json:"openstack,omitempty"`
-	// Vagrant contains the Shoot specification for the Vagrant local provider.
+	// Local contains the Shoot specification for the Local local provider.
 	// +optional
-	Vagrant *VagrantLocal `json:"vagrant,omitempty"`
+	Local *Local `json:"local,omitempty"`
 }
 
 // K8SNetworks contains CIDRs for the pod, service and node networks of a Kubernetes cluster.
@@ -779,17 +783,19 @@ type OpenStackWorker struct {
 	Worker `json:",inline"`
 }
 
-// VagrantLocal contains the Shoot specification for local Vagrant provider.
-type VagrantLocal struct {
+// Local contains the Shoot specification for local provider.
+type Local struct {
 	// Networks holds information about the Kubernetes and infrastructure networks.
-	Networks VagrantNetworks `json:"networks"`
-	// Endpoint of the local vagrant service.
+	Networks LocalNetworks `json:"networks"`
+	// Endpoint of the local service.
 	Endpoint string `json:"endpoint"`
 }
 
-// VagrantNetworks holds information about the Kubernetes and infrastructure networks.
-type VagrantNetworks struct {
+// LocalNetworks holds information about the Kubernetes and infrastructure networks.
+type LocalNetworks struct {
 	K8SNetworks `json:",inline"`
+	// Workers is a CIDR of a worker subnet (private) to create (used for the VMs).
+	Workers []CIDR `json:"workers"`
 }
 
 // Worker is the base definition of a worker group.
@@ -889,10 +895,10 @@ type Kube2IAMRole struct {
 	Policy string `json:"policy"`
 }
 
-// Backup holds information about the backup interval and maximum.
+// Backup holds information about the backup schedule and maximum.
 type Backup struct {
-	// IntervalInSecond defines the interval in seconds how often a backup is taken from etcd.
-	IntervalInSecond int `json:"intervalInSecond"`
+	// Schedule defines the cron schedule according to which a backup is taken from etcd.
+	Schedule string `json:"schedule"`
 	// Maximum indicates how many backups should be kept at maximum.
 	Maximum int `json:"maximum"`
 }
@@ -939,8 +945,8 @@ const (
 	CloudProviderGCP CloudProvider = "gcp"
 	// CloudProviderOpenStack is a constant for the OpenStack cloud provider.
 	CloudProviderOpenStack CloudProvider = "openstack"
-	// CloudProviderVagrant is a constant for the Vagrant local development provider.
-	CloudProviderVagrant CloudProvider = "vagrant"
+	// CloudProviderLocal is a constant for the development provider.
+	CloudProviderLocal CloudProvider = "local"
 )
 
 // CIDR is a string alias.
@@ -1066,8 +1072,8 @@ const (
 	DefaultPodNetworkCIDR = CIDR("100.96.0.0/11")
 	// DefaultServiceNetworkCIDR is a constant for the default service network CIDR of a Shoot cluster.
 	DefaultServiceNetworkCIDR = CIDR("100.64.0.0/13")
-	// DefaultETCDBackupIntervalSeconds is a constant for the default interval to take backups of a Shoot cluster (24 hours).
-	DefaultETCDBackupIntervalSeconds = 60 * 60 * 24
+	// DefaultETCDBackupSchedule is a constant for the default schedule to take backups of a Shoot cluster (5 minutes).
+	DefaultETCDBackupSchedule = "*/5 * * * *"
 	// DefaultETCDBackupMaximum is a constant for the default number of etcd backups to keep for a Shoot cluster.
 	DefaultETCDBackupMaximum = 7
 )
