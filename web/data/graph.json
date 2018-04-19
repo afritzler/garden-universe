@@ -45,30 +45,5 @@
 		}
 	],
 	"links": [
-		{
-			"source": "my-cluster",
-			"target": "os-eu-de-200",
-			"value": 0
-		},
-		{
-			"source": "aws",
-			"target": "soil-gcp",
-			"value": 1
-		},
-		{
-			"source": "az",
-			"target": "soil-gcp",
-			"value": 1
-		},
-		{
-			"source": "gcp",
-			"target": "soil-gcp",
-			"value": 1
-		},
-		{
-			"source": "openstack",
-			"target": "soil-gcp",
-			"value": 1
-		}
 	]
 }
