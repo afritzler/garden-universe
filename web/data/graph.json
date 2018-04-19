@@ -64,7 +64,7 @@
 			"source": "gcp",
 			"target": "soil-gcp",
 			"value": 1
-		}
+		},
 		{
 			"source": "openstack",
 			"target": "soil-gcp",
