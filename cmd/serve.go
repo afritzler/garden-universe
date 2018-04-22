@@ -55,7 +55,7 @@ func graphResponse(w http.ResponseWriter, r *http.Request) {
 	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
 	data, err := renderer.GetGraph(kubeconfig)
 	if err != nil {
-		fmt.Printf("failed to render landscape graph %s", err)
+		fmt.Printf("failed to render landscape graph: %s", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

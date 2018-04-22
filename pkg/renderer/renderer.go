@@ -28,12 +28,12 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
-		return nil, fmt.Errorf("failed to load kubeconfig: %s\n", err)
+		return nil, fmt.Errorf("failed to load kubeconfig: %s", err)
 	}
 
 	gardenset, err := gardenclientset.NewForConfig(config)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create garden clientset: %s\n", err)
+		return nil, fmt.Errorf("failed to create garden clientset: %s", err)
 	}
 
 	nodes := make(map[string]*bg.Node)
@@ -41,11 +41,11 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 
 	shoots, err := gardenset.GardenV1beta1().Shoots("").List(metav1.ListOptions{})
 	if err != nil {
-		return nil, fmt.Errorf("failed to get shoots: %s\n", err)
+		return nil, fmt.Errorf("failed to get shoots: %s", err)
 	}
 	seeds, err := gardenset.GardenV1beta1().Seeds().List(metav1.ListOptions{})
 	if err != nil {
-		return nil, fmt.Errorf("failed to get seeds: %s\n", err)
+		return nil, fmt.Errorf("failed to get seeds: %s", err)
 	}
 
 	// populate seeds

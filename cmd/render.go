@@ -40,7 +40,7 @@ func render() {
 	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
 	data, err := renderer.GetGraph(kubeconfig)
 	if err != nil {
-		fmt.Printf("failed to render landscape graph %s", err)
+		fmt.Printf("failed to render landscape graph: %s", err)
 		os.Exit(1)
 	}
 	fmt.Printf("%s\n", data)
