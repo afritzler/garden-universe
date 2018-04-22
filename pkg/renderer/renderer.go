@@ -17,8 +17,6 @@ package pkg
 import (
 	"encoding/json"
 	"fmt"
-	"log"
-	"os"
 
 	bg "github.com/afritzler/garden-universe/pkg/types"
 	gardenclientset "github.com/gardener/gardener/pkg/client/garden/clientset/versioned"
@@ -30,14 +28,12 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
-		fmt.Printf("failed to load kubeconfig: %s\n", err)
-		os.Exit(1)
+		return nil, fmt.Errorf("failed to load kubeconfig: %s\n", err)
 	}
 
 	gardenset, err := gardenclientset.NewForConfig(config)
 	if err != nil {
-		fmt.Printf("failed to create garden client: %s\n", err)
-		os.Exit(1)
+		return nil, fmt.Errorf("failed to create garden clientset: %s\n", err)
 	}
 
 	nodes := make(map[string]*bg.Node)
@@ -45,13 +41,11 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 
 	shoots, err := gardenset.GardenV1beta1().Shoots("").List(metav1.ListOptions{})
 	if err != nil {
-		fmt.Printf("failed to get shoots: %s\n", err)
-		os.Exit(1)
+		return nil, fmt.Errorf("failed to get shoots: %s\n", err)
 	}
 	seeds, err := gardenset.GardenV1beta1().Seeds().List(metav1.ListOptions{})
 	if err != nil {
-		fmt.Printf("failed to get seeds: %s\n", err)
-		os.Exit(1)
+		return nil, fmt.Errorf("failed to get seeds: %s\n", err)
 	}
 
 	// populate seeds
@@ -80,7 +74,7 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 	}
 	data, err := json.MarshalIndent(bg.Graph{Nodes: values(nodes), Links: &links}, "", "	")
 	if err != nil {
-		log.Fatalf("JSON marshaling failed: %s", err)
+		return nil, fmt.Errorf("JSON marshaling failed: %s", err)
 	}
 	return data, nil
 }
