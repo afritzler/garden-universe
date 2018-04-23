@@ -82,7 +82,10 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 		} else {
 			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Seed: false, Status: status}
 		}
-		links = append(links, bg.Link{Source: shootname, Target: seednames[*s.Spec.Cloud.Seed], Value: v})
+		projectMeta := *s.Spec.Cloud.Seed + namespace
+		nodes[projectMeta] = &bg.Node{Id: projectMeta, Project: namespace, Name: namespace, Seed: false, Status: ""}
+		links = append(links, bg.Link{Source: shootname, Target: projectMeta, Value: v})
+		links = append(links, bg.Link{Source: projectMeta, Target: seednames[*s.Spec.Cloud.Seed], Value: v})
 	}
 	data, err := json.MarshalIndent(bg.Graph{Nodes: values(nodes), Links: &links}, "", "	")
 	if err != nil {
