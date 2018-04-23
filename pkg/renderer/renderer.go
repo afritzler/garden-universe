@@ -17,8 +17,10 @@ package pkg
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	bg "github.com/afritzler/garden-universe/pkg/types"
+	"github.com/gardener/gardener/pkg/apis/garden"
 	gardenclientset "github.com/gardener/gardener/pkg/client/garden/clientset/versioned"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
@@ -48,16 +50,26 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 		return nil, fmt.Errorf("failed to get seeds: %s", err)
 	}
 
+	seednames := map[string]string{}
+
 	// populate seeds
 	for _, s := range seeds.Items {
-		nodeName := fmt.Sprintf("%s/%s", "seed", s.GetObjectMeta().GetName())
-		nodes[s.GetObjectMeta().GetName()] = &bg.Node{Id: s.GetObjectMeta().GetName(), Project: "", Name: nodeName, Seed: true}
+		//nodeName := fmt.Sprintf("%s/%s", "seed", s.GetObjectMeta().GetName())
+		refs := s.GetOwnerReferences()
+		name := "seed/" + s.GetObjectMeta().GetName()
+		for _, r := range refs {
+			if strings.Split(r.APIVersion, "/")[0] == garden.GroupName && r.Kind == "Shoot" {
+				name = "garden" + "/" + r.Name
+			}
+		}
+		nodes[name] = &bg.Node{Id: name, Project: "", Name: name, Seed: true}
+		seednames[s.GetObjectMeta().GetName()] = name
 	}
 
 	// populate nodes
 	for _, s := range shoots.Items {
-		shootname := s.GetObjectMeta().GetName()
-		nodeName := fmt.Sprintf("%s/%s", s.GetObjectMeta().GetNamespace(), s.GetObjectMeta().GetName())
+		namespace := s.GetObjectMeta().GetNamespace()
+		shootname := fmt.Sprintf("%s/%s", namespace, s.GetObjectMeta().GetName())
 		node, ok := nodes[shootname]
 		status := ""
 		if s.Status.LastError != nil {
@@ -65,12 +77,12 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 		}
 		v := 0
 		if ok {
-			node.Project = s.GetObjectMeta().GetNamespace()
+			node.Project = namespace
 			v = 1
 		} else {
-			nodes[shootname] = &bg.Node{Id: shootname, Project: s.GetObjectMeta().GetNamespace(), Name: nodeName, Seed: false, Status: status}
+			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Seed: false, Status: status}
 		}
-		links = append(links, bg.Link{Source: shootname, Target: *s.Spec.Cloud.Seed, Value: v})
+		links = append(links, bg.Link{Source: shootname, Target: seednames[*s.Spec.Cloud.Seed], Value: v})
 	}
 	data, err := json.MarshalIndent(bg.Graph{Nodes: values(nodes), Links: &links}, "", "	")
 	if err != nil {
