@@ -62,11 +62,11 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 				name = "garden" + "/" + r.Name
 			}
 		}
-		nodes[name] = &bg.Node{Id: name, Project: "", Name: name, Seed: true}
+		nodes[name] = &bg.Node{Id: name, Project: "", Name: name, Type: "seed"}
 		seednames[s.GetObjectMeta().GetName()] = name
 	}
 
-	// populate nodes
+	// populate nodes and links
 	for _, s := range shoots.Items {
 		namespace := s.GetObjectMeta().GetNamespace()
 		shootname := fmt.Sprintf("%s/%s", namespace, s.GetObjectMeta().GetName())
@@ -80,10 +80,10 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 			node.Project = namespace
 			v = 1
 		} else {
-			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Seed: false, Status: status}
+			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Type: "shoot", Status: status}
 		}
 		projectMeta := *s.Spec.Cloud.Seed + namespace
-		nodes[projectMeta] = &bg.Node{Id: projectMeta, Project: namespace, Name: namespace, Seed: false, Status: ""}
+		nodes[projectMeta] = &bg.Node{Id: projectMeta, Project: namespace, Name: namespace, Type: "project"}
 		links = append(links, bg.Link{Source: shootname, Target: projectMeta, Value: v})
 		links = append(links, bg.Link{Source: projectMeta, Target: seednames[*s.Spec.Cloud.Seed], Value: v})
 	}

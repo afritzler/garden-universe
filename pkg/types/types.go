@@ -22,7 +22,7 @@ type Node struct {
 	Id      string `json:"id"`
 	Project string `json:"project"`
 	Name    string `json:"name"`
-	Seed    bool   `json:"seed"`
+	Type    string `json:"type"`
 	Status  string `json:"status,omitempty"`
 }
 

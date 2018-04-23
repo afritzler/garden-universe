@@ -1,7 +1,7 @@
 <head>
     <style> body { margin: 0; } </style>
     <script src="../js/three.min.js"></script>
-
+    <script src="../js/three-spritetext.min.js"></script>
     <script src="../js/3d-force-graph.min.js"></script>
   </head>
   <body>
@@ -21,16 +21,22 @@
           })
           .nodeOpacity(1)
           .nodeAutoColorBy(function(n){
-            if (n.seed) {
-              return "seed"
+            if (n.type == "seed") {
+              return n.type
+            } else if (n.type == "project") {
+              return n.project
+            } else {
+              return "shoot-" + n.project
             }
-            return "shoot-" + n.project
           })
           .nodeVal(function(n){
-            if (n.seed) {
+            if (n.type == "seed") {
               return 3
+            } else if (n.type == "project") {
+              return 2
+            } else {
+              return 0.5
             }
-            return 0.5
           })
           .nodeThreeObject(function(n){
             if (n.hasOwnProperty('status')) {
@@ -42,6 +48,22 @@
                   opacity: 1
               }))
               return mesh
+            }
+            if (n.type == "project") {
+              var mesh = new THREE.Mesh(
+                new THREE.BoxGeometry(5,5,5),
+                new THREE.MeshLambertMaterial({
+                  color: Math.round(Math.random() * Math.pow(2, 24)),
+                  transparent: false,
+                  opacity: 1
+              }))
+              return mesh
+            }
+            if (n.type == "seed") {
+              const sprite = new SpriteText(n.id);
+              sprite.color = n.color;
+              sprite.textHeight = 5;
+              return sprite;
             }
           })
           .linkAutoColorBy('value')
