@@ -21,6 +21,7 @@ import (
 
 	bg "github.com/afritzler/garden-universe/pkg/types"
 	"github.com/gardener/gardener/pkg/apis/garden"
+	"github.com/gardener/gardener/pkg/apis/garden/v1beta1"
 	gardenclientset "github.com/gardener/gardener/pkg/client/garden/clientset/versioned"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
@@ -72,6 +73,7 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 		shootname := fmt.Sprintf("%s/%s", namespace, s.GetObjectMeta().GetName())
 		node, ok := nodes[shootname]
 		status := ""
+		size := getSizeOfShoot(s)
 		if s.Status.LastError != nil {
 			status = s.Status.LastError.Description
 		}
@@ -80,7 +82,7 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 			node.Project = namespace
 			v = 1
 		} else {
-			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Type: "shoot", Status: status}
+			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Type: "shoot", Status: status, Size: size}
 		}
 		projectMeta := *s.Spec.Cloud.Seed + namespace
 		nodes[projectMeta] = &bg.Node{Id: projectMeta, Project: namespace, Name: namespace, Type: "project"}
@@ -100,4 +102,29 @@ func values(nodes map[string]*bg.Node) *[]bg.Node {
 		array = append(array, *n)
 	}
 	return &array
+}
+
+func getSizeOfShoot(s v1beta1.Shoot) int {
+	size := 0
+	if s.Spec.Cloud.OpenStack != nil {
+		for _, w := range s.Spec.Cloud.OpenStack.Workers {
+			size += w.AutoScalerMin
+		}
+	}
+	if s.Spec.Cloud.AWS != nil {
+		for _, w := range s.Spec.Cloud.AWS.Workers {
+			size += w.AutoScalerMin
+		}
+	}
+	if s.Spec.Cloud.Azure != nil {
+		for _, w := range s.Spec.Cloud.Azure.Workers {
+			size += w.AutoScalerMin
+		}
+	}
+	if s.Spec.Cloud.GCP != nil {
+		for _, w := range s.Spec.Cloud.GCP.Workers {
+			size += w.AutoScalerMin
+		}
+	}
+	return size
 }

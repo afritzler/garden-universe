@@ -25,7 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "4e7ee75f0ac14ee82db17022b19a67f68486d57b"
+  revision = "d93bd87c690593f405be98ebd7cb87586698e5d3"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -202,7 +202,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "2b6c08872f4b66da917bb4ce98df4f0307330f78"
+  revision = "b0697eccbea9adec5b7ba8008f4c33d98d733388"
 
 [[projects]]
   branch = "master"
@@ -372,6 +372,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "96fb7dd858b3732cbfd4f154e4af7554245871a7bc715142bec25fed0a27cb11"
+  inputs-digest = "2f9628854dd58f3b61e6a8e13d6a14345fa66afd6bc050efd7cae04c25ce7552"
   solver-name = "gps-cdcl"
   solver-version = 1

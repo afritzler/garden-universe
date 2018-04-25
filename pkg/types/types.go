@@ -24,6 +24,7 @@ type Node struct {
 	Name    string `json:"name"`
 	Type    string `json:"type"`
 	Status  string `json:"status,omitempty"`
+	Size    int    `json:"size,omitempty"`
 }
 
 type Link struct {

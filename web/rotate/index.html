@@ -15,6 +15,8 @@
           .nodeLabel(function(n){
             if (n.hasOwnProperty('status')) {
               return n.name + '<br/>' + n.status
+            } else if (n.hasOwnProperty('size')) {
+              return n.name + " (" + n.size + ")"
             } else {
               return n.name
             }
@@ -35,7 +37,7 @@
             } else if (n.type == "project") {
               return 2
             } else {
-              return 0.5
+              return n.size
             }
           })
           .nodeThreeObject(function(n){
