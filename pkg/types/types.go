@@ -32,3 +32,8 @@ type Link struct {
 	Target string `json:"target"`
 	Value  int    `json:"value"`
 }
+
+type Stats struct {
+	NoOfShoots int `json:noofshoots`
+	NoOfNodes  int `json:noofnodes`
+}

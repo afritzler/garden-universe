@@ -18,7 +18,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/afritzler/garden-universe/pkg/gardener"
 	renderer "github.com/afritzler/garden-universe/pkg/renderer"
+	stats "github.com/afritzler/garden-universe/pkg/stats"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -48,12 +50,39 @@ func serve() {
 	fmt.Printf("started server on localhost:%s\n", port)
 	http.Handle("/", http.FileServer(http.Dir("./web")))
 	http.HandleFunc("/graph", graphResponse)
+	http.HandleFunc("/stats", statsResponse)
 	http.ListenAndServe(getPort(), nil)
+}
+
+func statsResponse(w http.ResponseWriter, r *http.Request) {
+	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
+	garden, err := gardener.NewGardener(kubeconfig)
+	if err != nil {
+		fmt.Printf("failed to get garden client for landscape: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	s := stats.NewStats(garden)
+	data, err := s.GetStatsJSON()
+	if err != nil {
+		fmt.Printf("failed to get stats for landscape: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(data)
 }
 
 func graphResponse(w http.ResponseWriter, r *http.Request) {
 	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
-	data, err := renderer.GetGraph(kubeconfig)
+	garden, err := gardener.NewGardener(kubeconfig)
+	if err != nil {
+		fmt.Printf("failed to get garden client for landscape: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	re := renderer.NewRenderer(garden)
+	data, err := re.GetGraph()
 	if err != nil {
 		fmt.Printf("failed to render landscape graph: %s", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)

@@ -19,35 +19,40 @@ import (
 	"os"
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
-	renderer "github.com/afritzler/garden-universe/pkg/renderer"
+	stats "github.com/afritzler/garden-universe/pkg/stats"
 	"github.com/spf13/cobra"
 )
 
-// renderCmd represents the render command
-var renderCmd = &cobra.Command{
-	Use:   "render",
-	Short: "Renders the landscape graph as JSON",
-	Long:  `Renders the landscape graph into JSON format and prints it out to stdout.`,
+// statsCmd represents the stats command
+var statsCmd = &cobra.Command{
+	Use:   "stats",
+	Short: "A brief description of your command",
+	Long: `A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		render()
+		getStats()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(renderCmd)
+	rootCmd.AddCommand(statsCmd)
 }
 
-func render() {
+func getStats() {
 	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
 	garden, err := gardener.NewGardener(kubeconfig)
 	if err != nil {
-		fmt.Printf("failed to render landscape graph: %s", err)
+		fmt.Printf("failed to get garden client for landscape: %s", err)
 		os.Exit(1)
 	}
-	re := renderer.NewRenderer(garden)
-	data, err := re.GetGraph()
+	s := stats.NewStats(garden)
+	data, err := s.GetStatsJSON()
 	if err != nil {
-		fmt.Printf("failed to render landscape graph: %s", err)
+		fmt.Printf("failed to render landscape stats: %s", err)
 		os.Exit(1)
 	}
 	fmt.Printf("%s\n", data)

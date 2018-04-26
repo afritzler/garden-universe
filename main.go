@@ -14,7 +14,9 @@
 
 package main
 
-import "github.com/afritzler/garden-universe/cmd"
+import (
+	"github.com/afritzler/garden-universe/cmd"
+)
 
 func main() {
 	cmd.Execute()

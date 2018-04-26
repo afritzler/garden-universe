@@ -19,43 +19,38 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/afritzler/garden-universe/pkg/gardener"
+	"github.com/afritzler/garden-universe/pkg/stats"
 	bg "github.com/afritzler/garden-universe/pkg/types"
 	"github.com/gardener/gardener/pkg/apis/garden"
-	"github.com/gardener/gardener/pkg/apis/garden/v1beta1"
-	gardenclientset "github.com/gardener/gardener/pkg/client/garden/clientset/versioned"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/tools/clientcmd"
 )
 
-func GetGraph(kubeconfig string) ([]byte, error) {
-	// use the current context in kubeconfig
-	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
-	if err != nil {
-		return nil, fmt.Errorf("failed to load kubeconfig: %s", err)
-	}
+type Renderer interface {
+	GetGraph() ([]byte, error)
+}
 
-	gardenset, err := gardenclientset.NewForConfig(config)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create garden clientset: %s", err)
-	}
+type renderer struct {
+	garden gardener.Gardener
+}
 
+func NewRenderer(garden gardener.Gardener) Renderer {
+	return &renderer{garden: garden}
+}
+
+func (r *renderer) GetGraph() ([]byte, error) {
 	nodes := make(map[string]*bg.Node)
 	links := make([]bg.Link, 0)
-
-	shoots, err := gardenset.GardenV1beta1().Shoots("").List(metav1.ListOptions{})
+	shoots, err := r.garden.GetShoots()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get shoots: %s", err)
 	}
-	seeds, err := gardenset.GardenV1beta1().Seeds().List(metav1.ListOptions{})
+	seeds, err := r.garden.GetSeeds()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get seeds: %s", err)
 	}
-
 	seednames := map[string]string{}
-
 	// populate seeds
-	for _, s := range seeds.Items {
-		//nodeName := fmt.Sprintf("%s/%s", "seed", s.GetObjectMeta().GetName())
+	for _, s := range *seeds {
 		refs := s.GetOwnerReferences()
 		name := "seed/" + s.GetObjectMeta().GetName()
 		for _, r := range refs {
@@ -68,12 +63,12 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 	}
 
 	// populate nodes and links
-	for _, s := range shoots.Items {
+	for _, s := range *shoots {
 		namespace := s.GetObjectMeta().GetNamespace()
 		shootname := fmt.Sprintf("%s/%s", namespace, s.GetObjectMeta().GetName())
 		node, ok := nodes[shootname]
 		status := ""
-		size := getSizeOfShoot(s)
+		size := stats.GetSizeOfShoot(s)
 		if s.Status.LastError != nil {
 			status = s.Status.LastError.Description
 		}
@@ -89,42 +84,17 @@ func GetGraph(kubeconfig string) ([]byte, error) {
 		links = append(links, bg.Link{Source: shootname, Target: projectMeta, Value: v})
 		links = append(links, bg.Link{Source: projectMeta, Target: seednames[*s.Spec.Cloud.Seed], Value: v})
 	}
-	data, err := json.MarshalIndent(bg.Graph{Nodes: values(nodes), Links: &links}, "", "	")
+	data, err := json.MarshalIndent(bg.Graph{Nodes: r.values(nodes), Links: &links}, "", "	")
 	if err != nil {
 		return nil, fmt.Errorf("JSON marshaling failed: %s", err)
 	}
 	return data, nil
 }
 
-func values(nodes map[string]*bg.Node) *[]bg.Node {
+func (r *renderer) values(nodes map[string]*bg.Node) *[]bg.Node {
 	array := []bg.Node{}
 	for _, n := range nodes {
 		array = append(array, *n)
 	}
 	return &array
-}
-
-func getSizeOfShoot(s v1beta1.Shoot) int {
-	size := 0
-	if s.Spec.Cloud.OpenStack != nil {
-		for _, w := range s.Spec.Cloud.OpenStack.Workers {
-			size += w.AutoScalerMin
-		}
-	}
-	if s.Spec.Cloud.AWS != nil {
-		for _, w := range s.Spec.Cloud.AWS.Workers {
-			size += w.AutoScalerMin
-		}
-	}
-	if s.Spec.Cloud.Azure != nil {
-		for _, w := range s.Spec.Cloud.Azure.Workers {
-			size += w.AutoScalerMin
-		}
-	}
-	if s.Spec.Cloud.GCP != nil {
-		for _, w := range s.Spec.Cloud.GCP.Workers {
-			size += w.AutoScalerMin
-		}
-	}
-	return size
 }
