@@ -16,11 +16,15 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+
+	_ "github.com/afritzler/garden-universe/statik"
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	renderer "github.com/afritzler/garden-universe/pkg/renderer"
 	stats "github.com/afritzler/garden-universe/pkg/stats"
+	"github.com/rakyll/statik/fs"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -48,7 +52,11 @@ func init() {
 
 func serve() {
 	fmt.Printf("started server on localhost:%s\n", port)
-	http.Handle("/", http.FileServer(http.Dir("./web")))
+	statikFS, err := fs.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+	http.Handle("/", http.FileServer(statikFS))
 	http.HandleFunc("/graph", graphResponse)
 	http.HandleFunc("/stats", statsResponse)
 	http.ListenAndServe(getPort(), nil)
