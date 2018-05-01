@@ -11,6 +11,28 @@ Garden universe renders a Kubernetes landscape which is setup and managed by the
 * Identify shoot clusters with errors
 * Show latest error message for a shoot
 
+# Installation and Usage
+
+Get the `garden-universe` binary
+```
+go get github.com/afritzler/garden-universe
+```
+Start `garden-universe` locally
+```
+garden-universe serve --kubeconfig=PATH_TO_MY_KUBECONFIG
+```
+
+The web UI can be accessed via http://localhost:3000 and the rendered landscape graph under http://localhost:3000/graph.
+With the `--port` flag you can also specify under which port the `garden-universe` server should be exposed (default is 3000).
+
+# Alternative Rendering
+
+There are two other rendering alternatives:
+
+* __VR Version__: http://localhost:3000/vr
+* __Rotation__: http://localhost:3000/rotate
+
+
 # Development
 
 To build and run the garden universe
