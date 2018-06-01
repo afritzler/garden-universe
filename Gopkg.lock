@@ -25,7 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "911e39101b62d25ff5986c49003678d1f8bc3663"
+  revision = "b43e09279646ba0b1b06dc32d1e39778d39c146a"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -208,7 +208,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "ab813273cd59e1333f7ae7bff5d027d4aadf528c"
+  revision = "5ba7f63082460102a45837dbd1827e10f9479ac0"
 
 [[projects]]
   branch = "master"
@@ -220,7 +220,7 @@
     "http2/hpack",
     "idna"
   ]
-  revision = "dfa909b99c79129e1100513e5cd36307665e5723"
+  revision = "1e491301e022f8f977054da4c2d852decd59571f"
 
 [[projects]]
   branch = "master"
@@ -271,6 +271,7 @@
   version = "v2.2.1"
 
 [[projects]]
+  branch = "master"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -302,8 +303,7 @@
     "storage/v1alpha1",
     "storage/v1beta1"
   ]
-  revision = "73d903622b7391f3312dcbac6483fed484e185f8"
-  version = "kubernetes-1.10.0"
+  revision = "dc6e60c1b0483cd8e94610bfacf6989fe55df091"
 
 [[projects]]
   name = "k8s.io/apimachinery"
