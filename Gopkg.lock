@@ -25,7 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "718e61fa4c03bd85b1ed87cdf540ace6aa0f4aae"
+  revision = "c8455ebd820feb11139e2f63f48615e2b26e43c5"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -229,7 +229,7 @@
     "unix",
     "windows"
   ]
-  revision = "bff228c7b664c5fce602223a05fb708fd8654986"
+  revision = "a9e25c09b96b8870693763211309e213c6ef299d"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -377,6 +377,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1f31e765ca8b880ad3774b3b890a33caef067362a87adf1406f3527ac543a99b"
+  inputs-digest = "11b8a85679a6fbf6b3734c924a9cbe8232249d25f08d04bef7e30e3919b411ce"
   solver-name = "gps-cdcl"
   solver-version = 1
