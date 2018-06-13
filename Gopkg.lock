@@ -25,7 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "c8455ebd820feb11139e2f63f48615e2b26e43c5"
+  revision = "bfa60d09e94986a9d432467f249d527b909afc1e"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
