@@ -25,7 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "bfa60d09e94986a9d432467f249d527b909afc1e"
+  revision = "d0f1fda30b679c730680af3355bfa1424fe4f37e"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -208,7 +208,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "8ac0e0d97ce45cd83d1d7243c060cb8461dda5e9"
+  revision = "027cca12c2d63e3d62b670d901e8a2c95854feec"
 
 [[projects]]
   branch = "master"
@@ -229,7 +229,7 @@
     "unix",
     "windows"
   ]
-  revision = "a9e25c09b96b8870693763211309e213c6ef299d"
+  revision = "6c888cc515d3ed83fc103cf1d84468aad274b0a7"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -303,7 +303,7 @@
     "storage/v1alpha1",
     "storage/v1beta1"
   ]
-  revision = "72d6e4405f8143815cbd454ab04b38210a9f32fc"
+  revision = "783dfbe86ff74ef4a6e1243688e1585ac243f8e7"
 
 [[projects]]
   name = "k8s.io/apimachinery"
