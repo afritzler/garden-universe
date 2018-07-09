@@ -25,7 +25,7 @@
     "pkg/logger",
     "pkg/utils"
   ]
-  revision = "f0dcad05d960430481158447230876db3cc59528"
+  revision = "ec4e48e4b5edcf1fd04de5900ef32184e22b8335"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -220,7 +220,7 @@
     "http2/hpack",
     "idna"
   ]
-  revision = "ed29d75add3d7c4bf7ca65aac0c6df3d1420216f"
+  revision = "6f138e0f60713a248abf7046f1014a3ba90f5341"
 
 [[projects]]
   branch = "master"
@@ -229,7 +229,7 @@
     "unix",
     "windows"
   ]
-  revision = "7138fd3d9dc8335c567ca206f4333fb75eb05d56"
+  revision = "1b2967e3c290b7c545b3db0deeda16e9be4f98a2"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -303,7 +303,7 @@
     "storage/v1alpha1",
     "storage/v1beta1"
   ]
-  revision = "5f0d8f067e3bc465077d0333e891450326a577a3"
+  revision = "8be2a0b24ed0dac9cfc1ac2d987ea16cfcdbecb6"
 
 [[projects]]
   name = "k8s.io/apimachinery"
