@@ -15,6 +15,8 @@
 package garden
 
 import (
+	"time"
+
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -905,6 +907,7 @@ type Monocular struct {
 type KubeLego struct {
 	Addon
 	// Mail is the email address to register at Let's Encrypt.
+	// +optional
 	Mail string
 }
 
@@ -912,6 +915,7 @@ type KubeLego struct {
 type Kube2IAM struct {
 	Addon
 	// Roles is list of AWS IAM roles which should be created by the Gardener.
+	// +optional
 	Roles []Kube2IAMRole
 }
 
@@ -1113,9 +1117,11 @@ const (
 	// DefaultServiceNetworkCIDR is a constant for the default service network CIDR of a Shoot cluster.
 	DefaultServiceNetworkCIDR = CIDR("100.64.0.0/13")
 	// DefaultETCDBackupSchedule is a constant for the default schedule to take backups of a Shoot cluster (5 minutes).
-	DefaultETCDBackupSchedule = "*/5 * * * *"
+	DefaultETCDBackupSchedule = "0 */24 * * *"
 	// DefaultETCDBackupMaximum is a constant for the default number of etcd backups to keep for a Shoot cluster.
 	DefaultETCDBackupMaximum = 7
+	// MinimumETCDFullBackupTimeInterval is the time interval between consecutive full backups.
+	MinimumETCDFullBackupTimeInterval = 24 * time.Hour
 )
 
 ////////////////////////
