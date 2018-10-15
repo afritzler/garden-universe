@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:a0cf7938e7c5d30e30057ea055bbc48dac8bdd8a9014334e4c39fffe7e2ecd8f"
+  digest = "1:0b8caef62893f64e3c4710d86011420c9781f9921b34ccb63e6db5b6a2223e4a"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "6a78733d5b5d9256b4429f81ac46e06c4a83d569"
+  revision = "dfc1252005936cb5fb62002051ae924f9e10adfa"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -252,12 +252,12 @@
   revision = "1355192d24db2566a83c3914e187e2a7e7679832"
 
 [[projects]]
-  digest = "1:dc2d85c13ac22c22a1f3170a41a8e1b897fa05134aaf533f16df44f66a25b4a1"
+  digest = "1:3f53e9e4dfbb664cd62940c9c4b65a2171c66acd0b7621a1a6b8e78513525a52"
   name = "github.com/sirupsen/logrus"
   packages = ["."]
   pruneopts = "UT"
-  revision = "a67f783a3814b8729bd2dac5780b5f78f8dbd64d"
-  version = "v1.1.0"
+  revision = "ad15b42461921f1fb3529b058c6786c6a45d5162"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:6a4a11ba764a56d2758899ec6f3848d24698d48442ebce85ee7a3f63284526cd"
@@ -316,7 +316,7 @@
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
   pruneopts = "UT"
-  revision = "e3636079e1a4c1f337f212cc5cd2aca108f6c900"
+  revision = "0c41d7ab0a0ee717d4590a44bcb987dfd9e183eb"
 
 [[projects]]
   branch = "master"
@@ -330,18 +330,18 @@
     "idna",
   ]
   pruneopts = "UT"
-  revision = "146acd28ed5894421fb5aac80ca93bc1b1f46f87"
+  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
 
 [[projects]]
   branch = "master"
-  digest = "1:850d28ab022512e2cd3cf511a77f363c29e22689b4031f2050871f5de47ae4a0"
+  digest = "1:f5aa274a0377f85735edc7fedfb0811d3cbc20af91633797cb359e29c3272271"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "4497e2df6f9e69048a54498c7affbbec3294ad47"
+  revision = "fa43e7bc11baaae89f3f902b2b4d832b68234844"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -392,7 +392,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:17df07c4092d58ff193b67aaa89240d7c96b92a02505e3700a7a0460f1c1b27d"
+  digest = "1:fc46b6f3786448358eff661c297f8fdd834ad976ebd82d57cded67027cc20eff"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -426,7 +426,7 @@
     "storage/v1beta1",
   ]
   pruneopts = "UT"
-  revision = "ded30614edd77e131ec4fb340f049041faebe692"
+  revision = "bbf5c193d86c33256702fc781833463a7bca7849"
 
 [[projects]]
   digest = "1:f31c52cc9bfffec03e433898b1c41477631bc5e86c73692709e8970249260c5e"
