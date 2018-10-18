@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:0b8caef62893f64e3c4710d86011420c9781f9921b34ccb63e6db5b6a2223e4a"
+  digest = "1:e45bc37972e1f2cc2a1938b8e54936bcac941e0d3ed11acc285577160ffb9ae1"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "dfc1252005936cb5fb62002051ae924f9e10adfa"
+  revision = "7517ccc7558dfb87e588c0c5d2fcc520d35f8eaf"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -330,7 +330,7 @@
     "idna",
   ]
   pruneopts = "UT"
-  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
+  revision = "04a2e542c03f1d053ab3e4d6e5abcd4b66e2be8e"
 
 [[projects]]
   branch = "master"
@@ -426,7 +426,7 @@
     "storage/v1beta1",
   ]
   pruneopts = "UT"
-  revision = "bbf5c193d86c33256702fc781833463a7bca7849"
+  revision = "843ad2d9b9ae703c74f2f43959e6ce0b24cc3185"
 
 [[projects]]
   digest = "1:f31c52cc9bfffec03e433898b1c41477631bc5e86c73692709e8970249260c5e"
