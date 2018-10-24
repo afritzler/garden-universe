@@ -3,12 +3,14 @@
     <script src="/js/three.min.js"></script>
     <script src="/js/three-spritetext.min.js"></script>
     <script src="/js/3d-force-graph.min.js"></script>
+    <script src="//unpkg.com/dat.gui"></script>
+
   </head>
   <body>
     <div id="3d-graph"></div>
     <script>
       const elem = document.getElementById('3d-graph');
-      const Graph = ForceGraph3D()
+      const graph = ForceGraph3D()
         (elem)
           .jsonUrl('/graph')
           .nodeLabel(function(n){
@@ -22,13 +24,18 @@
           })
           .nodeOpacity(1)
           .nodeAutoColorBy(function(n){
-            if (n.type == "seed") {
-              return n.type
-            } else if (n.type == "project") {
-              return n.project
+            if (n.hasOwnProperty('status')) {
+              return "red"
             } else {
-              return "shoot-" + n.project
+              return "white"
             }
+            // if (n.type == "seed") {
+            //   return n.type
+            // } else if (n.type == "project") {
+            //   return n.project
+            // } else {
+            //   return "shoot-" + n.project
+            // }
           })
           .nodeVal(function(n){
             if (n.type == "seed") {
@@ -44,7 +51,7 @@
               var mesh = new THREE.Mesh(
                 new THREE.DodecahedronGeometry(10),
                 new THREE.MeshLambertMaterial({
-                  color: Math.round(Math.random() * Math.pow(2, 24)),
+                  color: 'red',
                   transparent: false,
                   opacity: 1
               }))
@@ -63,9 +70,9 @@
               return sprite;
             }
           })
-          .linkAutoColorBy('value')
-          .linkWidth(0.5)
-          .linkDirectionalParticles(10)
+          //.linkAutoColorBy('value')
+          .linkWidth(0.01)
+          .linkDirectionalParticles(5)
           .numDimensions(3)
           .nodeResolution(15)
           .linkDirectionalParticleSpeed(0.005)
@@ -80,5 +87,21 @@
               3000  // ms transition duration
             );
           });
+          const linkForce = graph
+            .d3Force('link')
+            .distance(link => settings.distance);
+          
+          //Define GUI
+          const Settings = function() {
+            this.distance = 20;
+          };
+          const settings = new Settings();
+          const gui = new dat.GUI();
+          const controller = gui.add(settings, 'distance', 0, 1000);
+          controller.onChange(updateLinkDistance);
+          function updateLinkDistance() {
+            linkForce.distance(link => settings.distance);
+            graph.numDimensions(3); // Re-heat simulation
+          }
     </script>
   </body>
