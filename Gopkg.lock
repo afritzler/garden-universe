@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:e45bc37972e1f2cc2a1938b8e54936bcac941e0d3ed11acc285577160ffb9ae1"
+  digest = "1:01ebaaae631971fad0e436e96641e11b7398f028228bdb79f416b0e5ac1e3dad"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "7517ccc7558dfb87e588c0c5d2fcc520d35f8eaf"
+  revision = "68b8b1d8c19cbb53984e1d609abba37c120f67a7"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -320,28 +320,40 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b41f13f4d5dbbd63abe9bf646575e4f83d2637ca243b97ea79b7807242518e8c"
+  digest = "1:56f32737eb70d1269f66f18284487a443295e200ce9a5a3fff7a2d544eeca665"
   name = "golang.org/x/net"
   packages = [
     "context",
+    "context/ctxhttp",
     "http/httpguts",
     "http2",
     "http2/hpack",
     "idna",
   ]
   pruneopts = "UT"
-  revision = "04a2e542c03f1d053ab3e4d6e5abcd4b66e2be8e"
+  revision = "9b4f9f5ad5197c79fd623a3638e70d8b26cef344"
 
 [[projects]]
   branch = "master"
-  digest = "1:f5aa274a0377f85735edc7fedfb0811d3cbc20af91633797cb359e29c3272271"
+  digest = "1:1bce229fad01cbad9bd00e70ca32afff25ac2cea3dd710d50f88c967c1c3df65"
+  name = "golang.org/x/oauth2"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
+  revision = "9dcd33a902f40452422c2367fefcb95b54f9f8f8"
+
+[[projects]]
+  branch = "master"
+  digest = "1:899c684138eb2844811b7f97e264d3c65d533dbedc59549fa58fc2bf316f83a1"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "fa43e7bc11baaae89f3f902b2b4d832b68234844"
+  revision = "44b849a8bc13eb42e95e6c6c5e360481b73ec710"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -375,6 +387,22 @@
   revision = "fbb02b2291d28baffd63558aa44b4b56f178d650"
 
 [[projects]]
+  digest = "1:6247f76e55a1e1a5c19a81e2d4b4dff6730461eeb5bbb0a16dd4a8ec8637ee93"
+  name = "google.golang.org/appengine"
+  packages = [
+    "internal",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch",
+  ]
+  pruneopts = "UT"
+  revision = "ae0ab99deb4dc413a2b4bd6c8bdd0eb67f1e4d06"
+  version = "v1.2.0"
+
+[[projects]]
   digest = "1:2d1fbdc6777e5408cabeb02bf336305e724b925ff4546ded0fa8715a7267922a"
   name = "gopkg.in/inf.v0"
   packages = ["."]
@@ -392,7 +420,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:fc46b6f3786448358eff661c297f8fdd834ad976ebd82d57cded67027cc20eff"
+  digest = "1:563d1dee8245e168278d7c16bcd1ced84ddc74cb3644cd8713f5c82ef211a3c6"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -406,10 +434,12 @@
     "authorization/v1beta1",
     "autoscaling/v1",
     "autoscaling/v2beta1",
+    "autoscaling/v2beta2",
     "batch/v1",
     "batch/v1beta1",
     "batch/v2alpha1",
     "certificates/v1beta1",
+    "coordination/v1beta1",
     "core/v1",
     "events/v1beta1",
     "extensions/v1beta1",
@@ -429,7 +459,7 @@
   revision = "843ad2d9b9ae703c74f2f43959e6ce0b24cc3185"
 
 [[projects]]
-  digest = "1:f31c52cc9bfffec03e433898b1c41477631bc5e86c73692709e8970249260c5e"
+  digest = "1:49dd7b2b08a3f64ced408c4f2f3cca7afaed4e00752620d08737ba8413c45112"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
@@ -455,6 +485,7 @@
     "pkg/util/framer",
     "pkg/util/intstr",
     "pkg/util/json",
+    "pkg/util/naming",
     "pkg/util/net",
     "pkg/util/rand",
     "pkg/util/runtime",
@@ -468,11 +499,11 @@
     "third_party/forked/golang/reflect",
   ]
   pruneopts = "UT"
-  revision = "def12e63c512da17043b4f0293f52d1006603d9f"
-  version = "kubernetes-1.11.3"
+  revision = "6dd46049f39503a1fc8d65de4bd566829e95faff"
+  version = "kubernetes-1.12.1"
 
 [[projects]]
-  digest = "1:d9968bfbdf628be447d998dcddb5824d907a0bdb44b50e729cd0f78c0b652207"
+  digest = "1:46ae3f9f91edf87e625a06560190865582de8a92008ed46963c82c5f380ab9c3"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
@@ -498,8 +529,8 @@
     "util/integer",
   ]
   pruneopts = "UT"
-  revision = "2cefa64ff137e128daeddbd1775cd775708a05bf"
-  version = "kubernetes-1.11.3"
+  revision = "cb4883f3dea0a8d72fc4af710798a980992a773d"
+  version = "kubernetes-1.12.1"
 
 [solve-meta]
   analyzer-name = "dep"
