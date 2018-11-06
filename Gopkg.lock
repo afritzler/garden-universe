@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:531ab8c61584ea5a71d5a877f07da016bc3c76734c7094cc2e6bfcd929add174"
+  digest = "1:ffbf4c026ac0ea1e4c4fe5521d8bf45afdffa86da4d12f4b964cab39b59f33df"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "e17ba0331b0bd06639a95fbefbb4d091e5aadd23"
+  revision = "70ff4c73ea2a181a5847bea2b13f3f257ed8fad1"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -346,14 +346,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:417d27a82efb8473554234a282be33d23b0d6adc121e636b55950f913ac071d6"
+  digest = "1:509feef845f6af582cb82caad5eb176016b30714facdc754d84869ca31305b59"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "9b800f95dbbc54abff0acf7ee32d88ba4e328c89"
+  revision = "7155702f2d47d94b134229da97195d0130cab001"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
