@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ffbf4c026ac0ea1e4c4fe5521d8bf45afdffa86da4d12f4b964cab39b59f33df"
+  digest = "1:070359c06fbc595ebc339b9a39d7197deb389c950f43bc3e5cbe793817560e7d"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "70ff4c73ea2a181a5847bea2b13f3f257ed8fad1"
+  revision = "e3a1fd619bde73078df7c05aad986f504521c024"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -316,11 +316,11 @@
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
   pruneopts = "UT"
-  revision = "4d3f4d9ffa16a13f451c3b2999e9c49e9750bf06"
+  revision = "e4dc69e5b2fd71dcaf8bd5d054eb936deb78d1fa"
 
 [[projects]]
   branch = "master"
-  digest = "1:d5a9c206e40287e8dc3f5008cd47857050c29f0117918c9da91a6c4caeb05792"
+  digest = "1:31a48f140b86dc872576854f106ceb8eaf0bf3ef8f1eec403750445cb1a48928"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -331,29 +331,29 @@
     "idna",
   ]
   pruneopts = "UT"
-  revision = "10aee181995363b41f712a55844a0dd52ea04646"
+  revision = "03003ca0c849e57b6ea29a4bab8d3cb6e4d568fe"
 
 [[projects]]
   branch = "master"
-  digest = "1:81bafe9ef203750ed218e086d9930b21c086232ccc2a272e104d2af56baf6df5"
+  digest = "1:bd33fb266abe5db1fb1c04e58e98192068f05a8d22fae2a9f22270c8422bb331"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
     "internal",
   ]
   pruneopts = "UT"
-  revision = "ca4130e427c7982e64cb9b5e717ff67bdb725037"
+  revision = "f42d05182288abf10faef86d16c0d07b8d40ea2d"
 
 [[projects]]
   branch = "master"
-  digest = "1:509feef845f6af582cb82caad5eb176016b30714facdc754d84869ca31305b59"
+  digest = "1:6a875550c3b582f6c2d7e2ce44aba792511f00016d7c46b0a4fb26f730ef3058"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "7155702f2d47d94b134229da97195d0130cab001"
+  revision = "66b7b1311ac80bbafcd2daeef9a5e6e2cd1e2399"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -380,11 +380,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:c9e7a4b4d47c0ed205d257648b0e5b0440880cb728506e318f8ac7cd36270bc4"
+  digest = "1:9fdc2b55e8e0fafe4b41884091e51e77344f7dc511c5acedcfd98200003bff90"
   name = "golang.org/x/time"
   packages = ["rate"]
   pruneopts = "UT"
-  revision = "fbb02b2291d28baffd63558aa44b4b56f178d650"
+  revision = "85acf8d2951cb2a3bde7632f9ff273ef0379bcbd"
 
 [[projects]]
   digest = "1:08206298775e5b462e6c0333f4471b44e63f1a70e42952b6ede4ecc9572281eb"
@@ -420,7 +420,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:5bb339c9c05f3550379fb8624276a443b8a768268232748573cd9b6e2787f3c8"
+  digest = "1:bf61730197acc225b5153ba3eb3d7b87c01da71f98896d9855309f37be7743ca"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -456,7 +456,7 @@
     "storage/v1beta1",
   ]
   pruneopts = "UT"
-  revision = "de5c567eef5cb050b5476484727b074df9185088"
+  revision = "eee84a6322ca58a1557657a70bd3f5eda27e9c2a"
 
 [[projects]]
   digest = "1:49dd7b2b08a3f64ced408c4f2f3cca7afaed4e00752620d08737ba8413c45112"
