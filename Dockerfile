@@ -1,11 +1,11 @@
-FROM alpine:3.7
-ENTRYPOINT ["/bin/garden-universe"]
+FROM golang:1.11.2
+WORKDIR /go/src/github.com/afritzler/garden-universe
+RUN go get github.com/rakyll/statik  
+COPY . .
+RUN make
 
-COPY . /go/src/github.com/afritzler/garden-universe
-RUN apk --no-cache add -t build-deps build-base go git \
-	&& apk --no-cache add ca-certificates \
-	&& cd /go/src/github.com/afritzler/garden-universe \
-	&& export GOPATH=/go \
-	&& go build -o /bin/garden-universe \
-	&& rm -rf /go \
-	&& apk del --purge build-deps
+FROM alpine:latest  
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=0 /go/src/github.com/afritzler/garden-universe/garden-universe .
+CMD ["./garden-universe"]  
