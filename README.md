@@ -41,6 +41,12 @@ There are two other rendering alternatives:
 
 ## Development
 
+Before running `make` you need to make sure that `statik` is installed in your go workspace.
+
+```bash
+go get github.com/rakyll/statik
+```
+
 To build and run the garden universe
 
 ```bash
