@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:070359c06fbc595ebc339b9a39d7197deb389c950f43bc3e5cbe793817560e7d"
+  digest = "1:0b0f43e995670af8be205d4cc393c2bf3d42b1da63260871cb81eef782ee6d1f"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "e3a1fd619bde73078df7c05aad986f504521c024"
+  revision = "b7a31f4986689d37aa50d2d25640b894c4eda48b"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -111,7 +111,7 @@
     "diskcache",
   ]
   pruneopts = "UT"
-  revision = "9cad4c3443a7200dd6400aef47183728de563a38"
+  revision = "c63ab54fda8f77302f8d414e19933f2b6026a089"
 
 [[projects]]
   digest = "1:0ade334594e69404d80d9d323445d2297ff8161637f9b2d347cc6973d2d6f05b"
@@ -186,6 +186,14 @@
   pruneopts = "UT"
   revision = "c2353362d570a7bfa228149c62842019201cfb71"
   version = "v1.8.0"
+
+[[projects]]
+  digest = "1:b20d8767957e40b9302a8caaee88caa698513fbd972509a54555302c3aebfa04"
+  name = "github.com/miekg/dns"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "7064f7248f5fa5fd79382a76328b4e200b79e4ae"
+  version = "v1.0.15"
 
 [[projects]]
   branch = "master"
@@ -312,48 +320,57 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3f3a05ae0b95893d90b9b3b5afdb79a9b3d96e4e36e099d841ae602e4aca0da8"
+  digest = "1:583f2f436bab7b59a7bd3e759f1375b06f460760ed1f9235604d143eaab83009"
   name = "golang.org/x/crypto"
-  packages = ["ssh/terminal"]
+  packages = [
+    "ed25519",
+    "ed25519/internal/edwards25519",
+    "ssh/terminal",
+  ]
   pruneopts = "UT"
-  revision = "e4dc69e5b2fd71dcaf8bd5d054eb936deb78d1fa"
+  revision = "3d3f9f413869b949e48070b5bc593aa22cc2b8f2"
 
 [[projects]]
   branch = "master"
-  digest = "1:31a48f140b86dc872576854f106ceb8eaf0bf3ef8f1eec403750445cb1a48928"
+  digest = "1:12570f74c13ebaa7fa1018bbd29b3efcc4ccc2cdced20cceac4a3fc4c814d69b"
   name = "golang.org/x/net"
   packages = [
+    "bpf",
     "context",
     "context/ctxhttp",
     "http/httpguts",
     "http2",
     "http2/hpack",
     "idna",
+    "internal/iana",
+    "internal/socket",
+    "ipv4",
+    "ipv6",
   ]
   pruneopts = "UT"
-  revision = "03003ca0c849e57b6ea29a4bab8d3cb6e4d568fe"
+  revision = "adae6a3d119ae4890b46832a2e88a95adc62b8e7"
 
 [[projects]]
   branch = "master"
-  digest = "1:bd33fb266abe5db1fb1c04e58e98192068f05a8d22fae2a9f22270c8422bb331"
+  digest = "1:0142ef85bbc356750e329654ef29734ff05bd70ec9d8c1f46e39a3e97683318f"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
     "internal",
   ]
   pruneopts = "UT"
-  revision = "f42d05182288abf10faef86d16c0d07b8d40ea2d"
+  revision = "8f65e3013ebad444f13bc19536f7865efc793816"
 
 [[projects]]
   branch = "master"
-  digest = "1:6a875550c3b582f6c2d7e2ce44aba792511f00016d7c46b0a4fb26f730ef3058"
+  digest = "1:f343f077a5b0bc3a3788b3a04e24dd417e3e25b2acb529c413e212d2c42416ef"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "66b7b1311ac80bbafcd2daeef9a5e6e2cd1e2399"
+  revision = "0cf1ed9e522b7dbb416f080a5c8003de9b702bf4"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -420,7 +437,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:bf61730197acc225b5153ba3eb3d7b87c01da71f98896d9855309f37be7743ca"
+  digest = "1:2d2f8ae5a583a56906f10cfa3784b0bf7376d0069765fb438fa0736d266a6439"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -456,10 +473,10 @@
     "storage/v1beta1",
   ]
   pruneopts = "UT"
-  revision = "eee84a6322ca58a1557657a70bd3f5eda27e9c2a"
+  revision = "b7bd5f2d334ce968edc54f5fdb2ac67ce39c56d5"
 
 [[projects]]
-  digest = "1:49dd7b2b08a3f64ced408c4f2f3cca7afaed4e00752620d08737ba8413c45112"
+  digest = "1:52746e2dc29debb38a8bc61e0c208df3c151178ad4472371837f404ee7a53923"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
@@ -492,7 +509,6 @@
     "pkg/util/sets",
     "pkg/util/validation",
     "pkg/util/validation/field",
-    "pkg/util/wait",
     "pkg/util/yaml",
     "pkg/version",
     "pkg/watch",

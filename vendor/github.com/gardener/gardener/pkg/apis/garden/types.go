@@ -217,6 +217,9 @@ type OpenStackProfile struct {
 	// Kubernetes 1.10.1+. See https://github.com/kubernetes/kubernetes/pull/61890 for details.
 	// +optional
 	DHCPDomain *string
+	// RequestTimeout specifies the HTTP timeout against the OpenStack API.
+	// +optional
+	RequestTimeout *string
 }
 
 // OpenStackConstraints is an object containing constraints for certain values in the Shoot specification.
@@ -1190,6 +1193,18 @@ type CIDR string
 type Hibernation struct {
 	// Enabled is true if Shoot is hibernated, false otherwise.
 	Enabled bool
+	// Schedules determines the hibernation schedules.
+	// +optional
+	Schedules []HibernationSchedule
+}
+
+// HibernationSchedule determines the hibernation schedule of a Shoot.
+// A Shoot will be regularly hibernated at each start time and will be woken up at each end time.
+type HibernationSchedule struct {
+	// Start is a Cron spec at which time a Shoot will be hibernated.
+	Start string
+	// End is a Cron spec at which time a Shoot will be woken up.
+	End string
 }
 
 // Kubernetes contains the version and configuration variables for the Shoot control plane.
@@ -1552,6 +1567,8 @@ const (
 	ShootEveryNodeReady ConditionType = "EveryNodeReady"
 	// ShootSystemComponentsHealthy is a constant for a condition type indicating the system components health.
 	ShootSystemComponentsHealthy ConditionType = "SystemComponentsHealthy"
+	// ShootAPIServerAvailable is a constant for a condition type indicating the api server is available.
+	ShootAPIServerAvailable ConditionType = "APIServerAvailable"
 
 	// ConditionCheckError is a constant for indicating that a condition could not be checked.
 	ConditionCheckError = "ConditionCheckError"

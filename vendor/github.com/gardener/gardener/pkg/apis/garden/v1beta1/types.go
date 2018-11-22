@@ -218,6 +218,9 @@ type OpenStackProfile struct {
 	// Kubernetes 1.10.1+. See https://github.com/kubernetes/kubernetes/pull/61890 for details.
 	// +optional
 	DHCPDomain *string `json:"dhcpDomain,omitempty"`
+	// RequestTimeout specifies the HTTP timeout against the OpenStack API.
+	// +optional
+	RequestTimeout *string `json:"requestTimeout,omitempty"`
 }
 
 // OpenStackConstraints is an object containing constraints for certain values in the Shoot specification.
@@ -1182,6 +1185,18 @@ type CIDR string
 type Hibernation struct {
 	// Enabled is true if Shoot is hibernated, false otherwise.
 	Enabled bool `json:"enabled"`
+	// Schedules determine the hibernation schedules.
+	// +optional
+	Schedules []HibernationSchedule `json:"schedules,omitempty"`
+}
+
+// HibernationSchedule determines the hibernation schedule of a Shoot.
+// A Shoot will be regularly hibernated at each start time and will be woken up at each end time.
+type HibernationSchedule struct {
+	// Start is a Cron spec at which time a Shoot will be hibernated.
+	Start string `json:"start"`
+	// End is a Cron spec at which time a Shoot will be woken up.
+	End string `json:"end"`
 }
 
 // Kubernetes contains the version and configuration variables for the Shoot control plane.
@@ -1597,6 +1612,10 @@ const (
 	ShootEveryNodeReady ConditionType = "EveryNodeReady"
 	// ShootSystemComponentsHealthy is a constant for a condition type indicating the system components health.
 	ShootSystemComponentsHealthy ConditionType = "SystemComponentsHealthy"
+	// ShootAlertsInactive is a constant for a condition type indicating the Shoot cluster alert states.
+	ShootAlertsInactive ConditionType = "AlertsInactive"
+	// ShootAPIServerAvailable is a constant for a condition type indicating that the Shoot clusters API server is available.
+	ShootAPIServerAvailable ConditionType = "APIServerAvailable"
 
 	// ConditionCheckError is a constant for indicating that a condition could not be checked.
 	ConditionCheckError = "ConditionCheckError"
