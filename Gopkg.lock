@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:0b0f43e995670af8be205d4cc393c2bf3d42b1da63260871cb81eef782ee6d1f"
+  digest = "1:c0eb65eebd653c758d526cb6a33fc6c612e257667966988a9aa3e5ed41f6b236"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "b7a31f4986689d37aa50d2d25640b894c4eda48b"
+  revision = "0987fcbc7168159cc85b89ca25c93b658291ba79"
 
 [[projects]]
   digest = "1:2cd7915ab26ede7d95b8749e6b1f933f1c6d5398030684e6505940a10f31cfda"
@@ -320,7 +320,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:583f2f436bab7b59a7bd3e759f1375b06f460760ed1f9235604d143eaab83009"
+  digest = "1:cfd661f1a52594117f2a753bb640a86d4dbf3e0d778c2641bfbc750e6a1c8be7"
   name = "golang.org/x/crypto"
   packages = [
     "ed25519",
@@ -328,7 +328,7 @@
     "ssh/terminal",
   ]
   pruneopts = "UT"
-  revision = "3d3f9f413869b949e48070b5bc593aa22cc2b8f2"
+  revision = "eb0de9b17e854e9b1ccd9963efafc79862359959"
 
 [[projects]]
   branch = "master"
@@ -370,7 +370,7 @@
     "windows",
   ]
   pruneopts = "UT"
-  revision = "0cf1ed9e522b7dbb416f080a5c8003de9b702bf4"
+  revision = "62eef0e2fa9b2c385f7b2778e763486da6880d37"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
