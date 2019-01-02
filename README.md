@@ -11,7 +11,7 @@ Garden universe renders a Kubernetes landscape which is setup and managed by the
 ## Features
 
 * 3D landscape overview
-* Seed <-> shoot relationship 
+* Seed <-> shoot relationship
 * Identify shoot clusters with errors
 * Show latest error message for a shoot
 
@@ -74,4 +74,4 @@ make docker-build
 
 ## Acknowledgements
 
-Garden universe is using [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering. 
+Garden universe is using [3d-force-graph](https://github.com/vasturiano/3d-force-graph) for rendering.
