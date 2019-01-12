@@ -63,22 +63,22 @@ func GetSizeOfShoot(shoot v1beta1.Shoot) int {
 	size := 0
 	if shoot.Spec.Cloud.OpenStack != nil {
 		for _, w := range shoot.Spec.Cloud.OpenStack.Workers {
-			size += w.AutoScalerMin
+			size += w.AutoScalerMax
 		}
 	}
 	if shoot.Spec.Cloud.AWS != nil {
 		for _, w := range shoot.Spec.Cloud.AWS.Workers {
-			size += w.AutoScalerMin
+			size += w.AutoScalerMax
 		}
 	}
 	if shoot.Spec.Cloud.Azure != nil {
 		for _, w := range shoot.Spec.Cloud.Azure.Workers {
-			size += w.AutoScalerMin
+			size += w.AutoScalerMax
 		}
 	}
 	if shoot.Spec.Cloud.GCP != nil {
 		for _, w := range shoot.Spec.Cloud.GCP.Workers {
-			size += w.AutoScalerMin
+			size += w.AutoScalerMax
 		}
 	}
 	return size
