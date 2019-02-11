@@ -23,12 +23,10 @@
           })
           .nodeOpacity(1)
           .nodeAutoColorBy(function(n){
-            if (n.type == "seed") {
-              return n.type
-            } else if (n.type == "project") {
-              return n.project
+            if (n.hasOwnProperty('status')) {
+              return "red"
             } else {
-              return "shoot-" + n.project
+              return "white"
             }
           })
           .nodeVal(function(n){
@@ -45,32 +43,31 @@
               var mesh = new THREE.Mesh(
                 new THREE.DodecahedronGeometry(10),
                 new THREE.MeshLambertMaterial({
-                  color: Math.round(Math.random() * Math.pow(2, 24)),
+                  color: 'red',
                   transparent: false,
                   opacity: 1
               }))
               return mesh
             }
             if (n.type == "project") {
+              const sprite = new SpriteText(n.name);
+              sprite.color = n.color;
+              sprite.textHeight = 5;
+              return sprite;
+            }
+            if (n.type == "seed") {
               var mesh = new THREE.Mesh(
-                new THREE.BoxGeometry(5,5,5),
+                new THREE.SphereGeometry(5),
                 new THREE.MeshLambertMaterial({
-                  color: Math.round(Math.random() * Math.pow(2, 24)),
+                  color: 'yellow',
                   transparent: false,
                   opacity: 1
               }))
               return mesh
             }
-            if (n.type == "seed") {
-              const sprite = new SpriteText(n.id);
-              sprite.color = n.color;
-              sprite.textHeight = 5;
-              return sprite;
-            }
           })
-          .linkAutoColorBy('value')
-          .linkWidth(0.5)
-          .linkDirectionalParticles(10)
+          .linkWidth(0.01)
+          .linkDirectionalParticles(5)
           .numDimensions(3)
           .nodeResolution(15)
           .linkDirectionalParticleSpeed(0.005)
@@ -86,4 +83,3 @@
     </script>
   </body>
 
-  
