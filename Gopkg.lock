@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:52b517e22c5cbe8e457cfd9fb935306dd3166f0cf56f3c7b3c672dedeb70094c"
+  digest = "1:a3fee3ed1fbd6ee2cd7c3c9686b2d64b92509b27ba9e68b13546b7df71d0a251"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/garden",
@@ -31,7 +31,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "04a721b4fc9d2cd0aa2ba942bc471f82550fae70"
+  revision = "05bdca89fd8f157a19488cde6b4e87ff2d0c9026"
 
 [[projects]]
   digest = "1:4d02824a56d268f74a6b6fdd944b20b58a77c3d70e81008b3ee0c4f1a6777340"
@@ -59,12 +59,12 @@
   version = "v1.3.1"
 
 [[projects]]
-  branch = "master"
   digest = "1:0bfbe13936953a98ae3cfe8ed6670d396ad81edf069a806d2f6515d7bb6950df"
   name = "github.com/google/btree"
   packages = ["."]
   pruneopts = "UT"
   revision = "4030bb1f1f0c35b30ca7009e9ebd06849dd45306"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -237,11 +237,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ea0700160aca4ef099f4e06686a665a87691f4248dddd40796925eda2e46bd64"
+  digest = "1:77b730fa4c2d98f3ddf492acbea351eb6b0560fa5eace4105a6fc33ff937bb1b"
   name = "github.com/rakyll/statik"
   packages = ["fs"]
   pruneopts = "UT"
-  revision = "79258177a57a85a8ab2eca7ce0936aad80307f4e"
+  revision = "3bac566d30cdbeddef402a80f3d6305860e59f12"
 
 [[projects]]
   digest = "1:e4c72127d910a96daf869a44f3dd563b86dbe6931a172863a0e99c5ff04b59e4"
@@ -312,11 +312,11 @@
     "ssh/terminal",
   ]
   pruneopts = "UT"
-  revision = "a1f597ede03a7bef967a422b5b3a5bd08805a01e"
+  revision = "b7391e95e576cacdcdd422573063bc057239113d"
 
 [[projects]]
   branch = "master"
-  digest = "1:e83b9699992f54713353ae1ba26bb7585418f3f575cf90e0978e7530d245f5e6"
+  digest = "1:f5357dbc738da4b983d0c4fa9321684aae3b9ffb0f2ac868a7815cd565cab95e"
   name = "golang.org/x/net"
   packages = [
     "bpf",
@@ -332,29 +332,29 @@
     "ipv6",
   ]
   pruneopts = "UT"
-  revision = "9f648a60d9775ef5c977e7669d1673a7a67bef33"
+  revision = "addf6b3196f61cd44ce5a76657913698c73479d0"
 
 [[projects]]
   branch = "master"
-  digest = "1:037497a2c592b7aa03789f9d6492d02e7d7d166c0e363c95cb53952cf11c7ab0"
+  digest = "1:9927d6aceb89d188e21485f42a7a254e67e6fdcf4260aba375fe18e3c300dfb4"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
     "internal",
   ]
   pruneopts = "UT"
-  revision = "e64efc72b421e893cbf63f17ba2221e7d6d0b0f3"
+  revision = "c85d3e98c914e3a33234ad863dcbff5dbc425bb8"
 
 [[projects]]
   branch = "master"
-  digest = "1:ed708ad22c955df62e7eaba9ddd9edd3afc7818a4a72d9680bf797ac6c5ae3a8"
+  digest = "1:6b3e6ddcebac95be1d690dbd53b5aa2e520715becb7e521bb526ccf3b4c53c15"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "a2f829d7f35f2ed1c3520c553a6226495455cae0"
+  revision = "f49334f85ddcf0f08d7fb6dd7363e9e6d6b777eb"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -388,7 +388,7 @@
   revision = "9d24e82272b4f38b78bc8cff74fa936d31ccd8ef"
 
 [[projects]]
-  digest = "1:6f3bd49ddf2e104e52062774d797714371fac1b8bddfd8e124ce78e6b2264a10"
+  digest = "1:6eb6e3b6d9fffb62958cf7f7d88dbbe1dd6839436b0802e194c590667a40412a"
   name = "google.golang.org/appengine"
   packages = [
     "internal",
@@ -400,8 +400,8 @@
     "urlfetch",
   ]
   pruneopts = "UT"
-  revision = "e9657d882bb81064595ca3b56cbe2546bbabf7b1"
-  version = "v1.4.0"
+  revision = "54a98f90d1c46b7731eb8fb305d2a321c30ef610"
+  version = "v1.5.0"
 
 [[projects]]
   digest = "1:2d1fbdc6777e5408cabeb02bf336305e724b925ff4546ded0fa8715a7267922a"
