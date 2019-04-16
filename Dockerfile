@@ -1,11 +1,11 @@
-FROM golang:1.11.2
+FROM golang:1.12.4
 WORKDIR /go/src/github.com/afritzler/garden-universe
-RUN go get github.com/rakyll/statik  
+RUN go get github.com/rakyll/statik
 COPY . .
 RUN make
 
-FROM alpine:latest  
+FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=0 /go/src/github.com/afritzler/garden-universe/garden-universe .
-CMD ["./garden-universe"]  
+CMD ["./garden-universe"]
