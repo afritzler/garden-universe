@@ -27,7 +27,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:650ce6edf3b57bb4c60df2199e1303d73524b27f8ad2fdffdbee2dbd37c3e645"
+  digest = "1:840ea4c99950d6e222c4aea3465a53b0b780cf9d92feba2aac16d82d8eba742f"
   name = "github.com/gardener/gardener"
   packages = [
     "pkg/apis/core",
@@ -40,7 +40,7 @@
     "pkg/utils",
   ]
   pruneopts = "UT"
-  revision = "88fcb1b3248da4920dc780b0509fb8dabaa59dbf"
+  revision = "dc932690d7a277130ce4d395ecddbbfa7fe701ad"
 
 [[projects]]
   digest = "1:4d02824a56d268f74a6b6fdd944b20b58a77c3d70e81008b3ee0c4f1a6777340"
@@ -258,7 +258,7 @@
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
   pruneopts = "UT"
-  revision = "88737f569e3a9c7ab309cdc09a07fe7fc87233c3"
+  revision = "df01cb2cc480549d72034218dd98bf97671450ac"
 
 [[projects]]
   branch = "master"
@@ -273,7 +273,7 @@
     "idna",
   ]
   pruneopts = "UT"
-  revision = "1da14a5a36f220ea3f03470682b737b1dfd5de22"
+  revision = "afa5a82059c6356159f699d81beff22a81842231"
 
 [[projects]]
   branch = "master"
@@ -288,14 +288,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:788df6ab16e3b77c72cc916185de590254d2498027337005e0ed3e2c1f10ff7b"
+  digest = "1:a29b488ff122fd8033d43c7cfcc5a0f5b2b1faf5256e8b3bd1568c451f8c6b64"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "3fd5a3612ccd7907f26270fa92579a0f2f76f734"
+  revision = "e8e3143a4f4a00f1fafef0dd82ba78223281b01b"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -362,7 +362,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:01f2e3750b78f0f458cb6f8d12993a1b0ac8e61a92057fe78caa8ed36cf2f7c7"
+  digest = "1:08f27db4a5192ae419db7d6fb2c402c7faf3605ef3fb30c0976bdb34ee196947"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1beta1",
@@ -403,7 +403,7 @@
     "storage/v1beta1",
   ]
   pruneopts = "UT"
-  revision = "9eb4726e83e4519b935f4c97911065fbd613b500"
+  revision = "c5cad27821f602a806fbc313abf36f20aec596de"
 
 [[projects]]
   digest = "1:d12d8f6c4eda89d43b4046018dad52cc61630559972625ab65830b71e86b347d"
