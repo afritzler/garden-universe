@@ -76,7 +76,7 @@
           .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
           .onNodeClick(node => {
             // Aim at node from outside it
-            const distance = 40;
+            const distance = 10;
             const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
             Graph.cameraPosition(
               { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
@@ -90,11 +90,11 @@
 
           //Define GUI
           const Settings = function() {
-            this.distance = 50;
+            this.distance = 100;
           };
           const settings = new Settings();
           const gui = new dat.GUI();
-          const controller = gui.add(settings, 'distance', 0, 1000);
+          const controller = gui.add(settings, 'distance', 0, 500);
           controller.onChange(updateLinkDistance);
           function updateLinkDistance() {
             linkForce.distance(link => settings.distance);
