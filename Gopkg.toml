@@ -16,11 +16,11 @@
 
 [[constraint]]
   name = "k8s.io/apimachinery"
-  version = "kubernetes-1.14.0"
+  version = "kubernetes-1.14.2"
 
 [[constraint]]
   name = "k8s.io/client-go"
-  version = "kubernetes-1.14.0"
+  version = "kubernetes-1.14.2"
 
 [[constraint]]
   name = "github.com/rakyll/statik"

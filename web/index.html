@@ -67,7 +67,6 @@
               return mesh
             }
           })
-          //.linkAutoColorBy('value')
           .linkWidth(0.01)
           .linkDirectionalParticles(5)
           .numDimensions(3)
@@ -75,20 +74,19 @@
           .linkDirectionalParticleSpeed(0.005)
           .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
           .onNodeClick(node => {
-            // Aim at node from outside it
-            const distance = 10;
+            const distance = 40;
             const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
             Graph.cameraPosition(
               { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
-              node, // lookAt ({ x, y, z })
-              3000  // ms transition duration
+              node,
+              3000
             );
           });
           const linkForce = graph
             .d3Force('link')
             .distance(link => settings.distance);
 
-          //Define GUI
+          // Define GUI
           const Settings = function() {
             this.distance = 100;
           };
@@ -98,7 +96,7 @@
           controller.onChange(updateLinkDistance);
           function updateLinkDistance() {
             linkForce.distance(link => settings.distance);
-            graph.numDimensions(3); // Re-heat simulation
+            graph.numDimensions(3);
           }
     </script>
   </body>
