@@ -20,6 +20,7 @@ import (
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	renderer "github.com/afritzler/garden-universe/pkg/renderer"
+	"github.com/afritzler/garden-universe/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -38,7 +39,7 @@ func init() {
 }
 
 func render() {
-	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
+	kubeconfig := utils.GetKubeConfigFlagOrEnv(rootCmd)
 	garden, err := gardener.NewGardener(kubeconfig)
 	if err != nil {
 		fmt.Printf("failed to render landscape graph: %s", err)

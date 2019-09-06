@@ -1,4 +1,4 @@
-FROM golang:1.12.4
+FROM golang:1.13.0
 WORKDIR /go/src/github.com/afritzler/garden-universe
 RUN go get github.com/rakyll/statik
 COPY . .
@@ -8,4 +8,4 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=0 /go/src/github.com/afritzler/garden-universe/garden-universe .
-CMD ["./garden-universe"]
+ENTRYPOINT [ "/garden-universe"]

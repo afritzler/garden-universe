@@ -18,12 +18,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/afritzler/garden-universe/statik"
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	renderer "github.com/afritzler/garden-universe/pkg/renderer"
 	stats "github.com/afritzler/garden-universe/pkg/stats"
+	"github.com/afritzler/garden-universe/pkg/utils"
 	"github.com/rakyll/statik/fs"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -35,8 +37,8 @@ var port string
 var serveCmd = &cobra.Command{
 	Use:   "serve",
 	Short: "Starts a webserver to serve the 3D landscape view",
-	Long: `Starts a webserver to serve the 3D landscape view. 
-	
+	Long: `Starts a webserver to serve the 3D landscape view.
+
 By default, the website can be accessed on http://localhost:3000. The JSON representation of
 the landscape graph can be found under http://localhost:3000/graph.`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -63,7 +65,7 @@ func serve() {
 }
 
 func statsResponse(w http.ResponseWriter, r *http.Request) {
-	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
+	kubeconfig := utils.GetKubeConfigFlagOrEnv(rootCmd)
 	garden, err := gardener.NewGardener(kubeconfig)
 	if err != nil {
 		fmt.Printf("failed to get garden client for landscape: %s", err)
@@ -82,7 +84,13 @@ func statsResponse(w http.ResponseWriter, r *http.Request) {
 }
 
 func graphResponse(w http.ResponseWriter, r *http.Request) {
-	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
+	kubeconfig := os.Getenv("KUBECONFIG")
+	if kubeconfig == "" {
+		kubeconfig = rootCmd.Flag("kubeconfig").Value.String()
+		fmt.Printf("using kubeconfig: %s", kubeconfig)
+	} else {
+		fmt.Printf("using KUBECONFIG env: %s", kubeconfig)
+	}
 	garden, err := gardener.NewGardener(kubeconfig)
 	if err != nil {
 		fmt.Printf("failed to get garden client for landscape: %s", err)

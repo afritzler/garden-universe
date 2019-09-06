@@ -20,6 +20,7 @@ import (
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	stats "github.com/afritzler/garden-universe/pkg/stats"
+	"github.com/afritzler/garden-universe/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -43,7 +44,7 @@ func init() {
 }
 
 func getStats() {
-	kubeconfig := rootCmd.Flag("kubeconfig").Value.String()
+	kubeconfig := utils.GetKubeConfigFlagOrEnv(rootCmd)
 	garden, err := gardener.NewGardener(kubeconfig)
 	if err != nil {
 		fmt.Printf("failed to get garden client for landscape: %s", err)
