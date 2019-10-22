@@ -21,6 +21,7 @@ import (
 	"os"
 
 	_ "github.com/afritzler/garden-universe/statik"
+	"github.com/prometheus/client_golang/api"
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	renderer "github.com/afritzler/garden-universe/pkg/renderer"
@@ -84,6 +85,34 @@ func statsResponse(w http.ResponseWriter, r *http.Request) {
 }
 
 func graphResponse(w http.ResponseWriter, r *http.Request) {
+	if prometheus != "" {
+		graphPrometheusResponse(w, r)
+	} else {
+		graphKubeResponse(w, r)
+	}
+}
+
+func graphPrometheusResponse(w http.ResponseWriter, r *http.Request) {
+	client, err := api.NewClient(api.Config{
+		Address: prometheus,
+	})
+	if err != nil {
+		log.Fatalf("could not instantiate prometheus client %v", err)
+		panic("failed to initialize prometheus")
+	}
+
+	re := renderer.NewPromRenderer(client)
+	data, err := re.GetGraph()
+	if err != nil {
+		fmt.Printf("failed to render landscape graph: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(data)
+}
+
+func graphKubeResponse(w http.ResponseWriter, r *http.Request) {
 	kubeconfig := os.Getenv("KUBECONFIG")
 	if kubeconfig == "" {
 		kubeconfig = rootCmd.Flag("kubeconfig").Value.String()
@@ -97,7 +126,7 @@ func graphResponse(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	re := renderer.NewRenderer(garden)
+	re := renderer.NewKubeRenderer(garden)
 	data, err := re.GetGraph()
 	if err != nil {
 		fmt.Printf("failed to render landscape graph: %s", err)

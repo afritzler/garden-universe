@@ -23,51 +23,21 @@
             }
           })
           .nodeOpacity(1)
-          .nodeAutoColorBy(function(n){
-            if (n.hasOwnProperty('status')) {
-              return "red"
-            } else {
-              return "white"
-            }
-          })
           .nodeVal(function(n){
-            if (n.type == "seed") {
-              return 3
-            } else if (n.type == "project") {
-              return 2
-            } else {
               return n.size
-            }
           })
-          .nodeThreeObject(function(n){
-            if (n.hasOwnProperty('status')) {
-              var mesh = new THREE.Mesh(
-                new THREE.DodecahedronGeometry(10),
-                new THREE.MeshLambertMaterial({
-                  color: 'red',
-                  transparent: false,
-                  opacity: 1
-              }))
-              return mesh
-            }
-            if (n.type == "project") {
-              const sprite = new SpriteText(n.name);
-              sprite.color = n.color;
-              sprite.textHeight = 5;
-              return sprite;
+          .nodeColor(function(n){
+            if (!n.availability) {
+              return 'red'
             }
             if (n.type == "seed") {
-              var mesh = new THREE.Mesh(
-                new THREE.SphereGeometry(5),
-                new THREE.MeshLambertMaterial({
-                  color: 'yellow',
-                  transparent: false,
-                  opacity: 1
-              }))
-              return mesh
+              return 'white'
+            }
+            if (n.type == "shoot") {
+              return 'gray'
             }
           })
-          .linkWidth(0.01)
+          .linkWidth(1.0)
           .linkDirectionalParticles(5)
           .numDimensions(3)
           .nodeResolution(15)

@@ -21,6 +21,7 @@ import (
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	renderer "github.com/afritzler/garden-universe/pkg/renderer"
 	"github.com/afritzler/garden-universe/pkg/utils"
+	"github.com/prometheus/client_golang/api"
 	"github.com/spf13/cobra"
 )
 
@@ -39,13 +40,29 @@ func init() {
 }
 
 func render() {
+	promAddress := rootCmd.Flag("prometheus").Value.String()
+	if promAddress != "" {
+		client, err := api.NewClient(api.Config{
+			Address: promAddress,
+		})
+		if err != nil {
+			return
+		}
+		re := renderer.NewPromRenderer(client)
+		data, err := re.GetGraph()
+		if err != nil {
+			fmt.Printf("failed to render landscape graph: %s", err)
+			os.Exit(1)
+		}
+		fmt.Printf("%s\n", data)
+	}
 	kubeconfig := utils.GetKubeConfigFlagOrEnv(rootCmd)
 	garden, err := gardener.NewGardener(kubeconfig)
 	if err != nil {
 		fmt.Printf("failed to render landscape graph: %s", err)
 		os.Exit(1)
 	}
-	re := renderer.NewRenderer(garden)
+	re := renderer.NewKubeRenderer(garden)
 	data, err := re.GetGraph()
 	if err != nil {
 		fmt.Printf("failed to render landscape graph: %s", err)

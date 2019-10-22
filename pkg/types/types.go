@@ -19,12 +19,14 @@ type Graph struct {
 }
 
 type Node struct {
-	Id      string `json:"id"`
-	Project string `json:"project"`
-	Name    string `json:"name"`
-	Type    string `json:"type"`
-	Status  string `json:"status,omitempty"`
-	Size    int    `json:"size,omitempty"`
+	Id           string `json:"id"`
+	Project      string `json:"project"`
+	Name         string `json:"name"`
+	Type         string `json:"type"`
+	Status       string `json:"status,omitempty"`
+	Size         int    `json:"size,omitempty"`
+	Region       string `json:"region"`
+	Availability bool   `json:"availability"`
 }
 
 type Link struct {
