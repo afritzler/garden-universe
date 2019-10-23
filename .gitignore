@@ -1,3 +1,4 @@
 web/*.json
 garden-universe*
 .DS_Store
+.vscode/
