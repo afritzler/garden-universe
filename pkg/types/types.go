@@ -26,7 +26,7 @@ type Node struct {
 	Status       string `json:"status,omitempty"`
 	Size         int    `json:"size,omitempty"`
 	Region       string `json:"region"`
-	Availability bool   `json:"availability"`
+	Availability bool   `json:"availability,omitempty"`
 }
 
 type Link struct {

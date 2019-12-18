@@ -24,17 +24,32 @@
           })
           .nodeOpacity(1)
           .nodeVal(function(n){
+            if (n.type == "project") {
+              return 2
+            } else {
               return n.size
+            }
+          })
+          .nodeThreeObject(function(n){
+            if (n.type == "project") {
+              const sprite = new SpriteText(n.name)
+              sprite.color = "white"
+              sprite.textHeight = 5
+              return sprite
+            }
           })
           .nodeColor(function(n){
-            if (!n.availability) {
+            if (n.availability != null && !n.availability) {
               return 'red'
-            }
-            if (n.type == "seed") {
-              return 'white'
-            }
-            if (n.type == "shoot") {
-              return 'gray'
+            } else { // kubeconfig case
+              if (n.type == "seed") {
+                return 'white'
+              }
+              if (n.type == "shoot" && n.status != null) {
+                return 'red'
+              } else {
+                return 'grey'
+              }
             }
           })
           .linkWidth(1.0)
