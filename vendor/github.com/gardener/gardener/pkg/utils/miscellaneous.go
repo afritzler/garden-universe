@@ -15,22 +15,12 @@
 package utils
 
 import (
-	"io/ioutil"
 	"net"
 	"regexp"
 	"time"
 
-	"github.com/sirupsen/logrus"
-
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
-
-// NewNopLogger instantiates a new logger that logs to ioutil.Discard.
-func NewNopLogger() *logrus.Logger {
-	logger := logrus.New()
-	logger.Out = ioutil.Discard
-	return logger
-}
 
 // ValueExists returns true or false, depending on whether the given string <value>
 // is part of the given []string list <list>.
@@ -106,8 +96,8 @@ func TimeElapsed(timestamp *metav1.Time, duration time.Duration) bool {
 	}
 
 	var (
-		end = metav1.NewTime(timestamp.Time.Add(duration))
-		now = metav1.Now()
+		end = metav1.NewTime(timestamp.Time.UTC().Add(duration))
+		now = metav1.NewTime(time.Now().UTC())
 	)
 	return !now.Before(&end)
 }
@@ -126,4 +116,18 @@ func FindFreePort() (int, error) {
 func TestEmail(email string) bool {
 	match, _ := regexp.MatchString(`^[^@]+@(?:[a-zA-Z-0-9]+\.)+[a-zA-Z]{2,}$`, email)
 	return match
+}
+
+// IsTrue returns true if the passed bool pointer is not nil and true.
+func IsTrue(value *bool) bool {
+	return value != nil && *value
+}
+
+// IDForKeyWithOptionalValue returns an identifier for the given key + optional value.
+func IDForKeyWithOptionalValue(key string, value *string) string {
+	v := ""
+	if value != nil {
+		v = "=" + *value
+	}
+	return key + v
 }

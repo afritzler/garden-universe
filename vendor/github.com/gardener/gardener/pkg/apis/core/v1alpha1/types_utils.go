@@ -16,24 +16,14 @@ package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
 )
 
-// ProviderConfig is a workaround for missing OpenAPI functions on runtime.RawExtension struct.
-// https://github.com/kubernetes/kubernetes/issues/55890
-// https://github.com/kubernetes-sigs/cluster-api/issues/137
-type ProviderConfig struct {
-	runtime.RawExtension `json:",inline"`
-}
-
-// OpenAPISchemaType is used by the kube-openapi generator when constructing
-// the OpenAPI spec of this type.
-// See: https://github.com/kubernetes/kube-openapi/tree/master/pkg/generators
-func (ProviderConfig) OpenAPISchemaType() []string { return []string{"object"} }
-
-// OpenAPISchemaFormat is used by the kube-openapi generator when constructing
-// the OpenAPI spec of this type.
-func (ProviderConfig) OpenAPISchemaFormat() string { return "" }
+const (
+	// EventSchedulingSuccessful is an event reason for successful scheduling.
+	EventSchedulingSuccessful = "SchedulingSuccessful"
+	// EventSchedulingFailed is an event reason for failed scheduling.
+	EventSchedulingFailed = "SchedulingFailed"
+)
 
 // ConditionStatus is the status of a condition.
 type ConditionStatus string
@@ -44,17 +34,20 @@ type ConditionType string
 // Condition holds the information about the state of a resource.
 type Condition struct {
 	// Type of the Shoot condition.
-	Type ConditionType `json:"type"`
+	Type ConditionType `json:"type" protobuf:"bytes,1,opt,name=type,casttype=ConditionType"`
 	// Status of the condition, one of True, False, Unknown.
-	Status ConditionStatus `json:"status"`
+	Status ConditionStatus `json:"status" protobuf:"bytes,2,opt,name=status,casttype=ConditionStatus"`
 	// Last time the condition transitioned from one status to another.
-	LastTransitionTime metav1.Time `json:"lastTransitionTime"`
+	LastTransitionTime metav1.Time `json:"lastTransitionTime" protobuf:"bytes,3,opt,name=lastTransitionTime"`
 	// Last time the condition was updated.
-	LastUpdateTime metav1.Time `json:"lastUpdateTime"`
+	LastUpdateTime metav1.Time `json:"lastUpdateTime" protobuf:"bytes,4,opt,name=lastUpdateTime"`
 	// The reason for the condition's last transition.
-	Reason string `json:"reason"`
+	Reason string `json:"reason" protobuf:"bytes,5,opt,name=reason"`
 	// A human readable message indicating details about the transition.
-	Message string `json:"message"`
+	Message string `json:"message" protobuf:"bytes,6,opt,name=message"`
+	// Well-defined error codes in case the condition reports a problem.
+	// +optional
+	Codes []ErrorCode `json:"codes,omitempty" protobuf:"bytes,7,rep,name=codes,casttype=ErrorCode"`
 }
 
 const (
@@ -70,27 +63,10 @@ const (
 
 	// ConditionCheckError is a constant for a reason in condition.
 	ConditionCheckError = "ConditionCheckError"
-)
-
-// CIDR is a string alias.
-type CIDR string
-
-// K8SNetworks contains CIDRs for the pod, service and node networks of a Kubernetes cluster.
-type K8SNetworks struct {
-	// Nodes is the CIDR of the node network.
-	// +optional
-	Nodes *CIDR `json:"nodes,omitempty"`
-	// Pods is the CIDR of the pod network.
-	// +optional
-	Pods *CIDR `json:"pods,omitempty"`
-	// Services is the CIDR of the service network.
-	// +optional
-	Services *CIDR `json:"services,omitempty"`
-}
-
-const (
-	// DefaultPodNetworkCIDR is a constant for the default pod network CIDR of a Shoot cluster.
-	DefaultPodNetworkCIDR = CIDR("100.96.0.0/11")
-	// DefaultServiceNetworkCIDR is a constant for the default service network CIDR of a Shoot cluster.
-	DefaultServiceNetworkCIDR = CIDR("100.64.0.0/13")
+	// ManagedResourceMissingConditionError is a constant for a reason in a condition that indicates
+	// one or multiple missing conditions in the observed managed resource.
+	ManagedResourceMissingConditionError = "MissingManagedResourceCondition"
+	// OutdatedStatusError is a constant for a reason in a condition that indicates
+	// that the observed generation in a status is outdated.
+	OutdatedStatusError = "OutdatedStatus"
 )

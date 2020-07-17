@@ -49,7 +49,7 @@ func NewMaintenanceTime(hour, minute, second int) *MaintenanceTime {
 func ParseMaintenanceTime(value string) (*MaintenanceTime, error) {
 	t, err := time.Parse(maintenanceTimeLayout, value)
 	if err != nil {
-		return nil, fmt.Errorf("Could not parse the value into the maintenanceTime format: %s", err.Error())
+		return nil, fmt.Errorf("could not parse the value into the maintenanceTime format: %s", err.Error())
 	}
 	return timeToMaintenanceTime(t), nil
 }
@@ -129,6 +129,9 @@ type MaintenanceTimeWindow struct {
 	end   *MaintenanceTime
 }
 
+// AlwaysTimeWindow is a MaintenanceTimeWindow that contains all durations.
+var AlwaysTimeWindow = NewMaintenanceTimeWindow(NewMaintenanceTime(0, 0, 0), NewMaintenanceTime(23, 59, 59))
+
 // NewMaintenanceTimeWindow takes a begin and an end of a time window and returns a pointer to a MaintenanceTimeWindow structure.
 func NewMaintenanceTimeWindow(begin, end *MaintenanceTime) *MaintenanceTimeWindow {
 	return &MaintenanceTimeWindow{begin, end}
@@ -139,11 +142,11 @@ func NewMaintenanceTimeWindow(begin, end *MaintenanceTime) *MaintenanceTimeWindo
 func ParseMaintenanceTimeWindow(begin, end string) (*MaintenanceTimeWindow, error) {
 	maintenanceWindowBegin, err := ParseMaintenanceTime(begin)
 	if err != nil {
-		return nil, fmt.Errorf("Could not parse begin time: %s", err.Error())
+		return nil, fmt.Errorf("could not parse begin time: %s", err.Error())
 	}
 	maintenanceWindowEnd, err := ParseMaintenanceTime(end)
 	if err != nil {
-		return nil, fmt.Errorf("Could not parse end time: %s", err.Error())
+		return nil, fmt.Errorf("could not parse end time: %s", err.Error())
 	}
 	return NewMaintenanceTimeWindow(maintenanceWindowBegin, maintenanceWindowEnd), nil
 }
@@ -151,6 +154,11 @@ func ParseMaintenanceTimeWindow(begin, end string) (*MaintenanceTimeWindow, erro
 // String returns the string representation of the time window.
 func (m *MaintenanceTimeWindow) String() string {
 	return fmt.Sprintf("begin=%s, end=%s", m.begin, m.end)
+}
+
+// Equal returns true if the time windows are the same.
+func (m *MaintenanceTimeWindow) Equal(o *MaintenanceTimeWindow) bool {
+	return m.Begin().Compare(o.Begin()) == 0 && m.End().Compare(o.End()) == 0
 }
 
 // Begin returns the begin of the time window.

@@ -21,7 +21,7 @@ import (
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	"github.com/afritzler/garden-universe/pkg/stats"
 	bg "github.com/afritzler/garden-universe/pkg/types"
-	"github.com/gardener/gardener/pkg/apis/garden"
+	"github.com/gardener/gardener/pkg/apis/core"
 )
 
 func NewKubeRenderer(garden gardener.Gardener) Renderer {
@@ -45,7 +45,7 @@ func (r *kuberenderer) GetGraph() ([]byte, error) {
 		refs := s.GetOwnerReferences()
 		name := "seed/" + s.GetObjectMeta().GetName()
 		for _, r := range refs {
-			if strings.Split(r.APIVersion, "/")[0] == garden.GroupName && r.Kind == "Shoot" {
+			if strings.Split(r.APIVersion, "/")[0] == core.GroupName && r.Kind == "Shoot" {
 				name = "garden" + "/" + r.Name
 			}
 		}
@@ -60,8 +60,8 @@ func (r *kuberenderer) GetGraph() ([]byte, error) {
 		node, ok := nodes[shootname]
 		status := ""
 		size := stats.GetSizeOfShoot(s)
-		if s.Status.LastError != nil {
-			status = s.Status.LastError.Description
+		if len(s.Status.LastErrors) > 0 {
+			status = s.Status.LastErrors[0].Description
 		}
 		v := 0
 		if ok {
@@ -70,10 +70,14 @@ func (r *kuberenderer) GetGraph() ([]byte, error) {
 		} else {
 			nodes[shootname] = &bg.Node{Id: shootname, Project: namespace, Name: shootname, Type: "shoot", Status: status, Size: size}
 		}
-		projectMeta := *s.Spec.Cloud.Seed + namespace
+		seedName := "core"
+		if s.Spec.SeedName != nil {
+			seedName = *s.Spec.SeedName
+		}
+		projectMeta := seedName + namespace
 		nodes[projectMeta] = &bg.Node{Id: projectMeta, Project: namespace, Name: namespace, Type: "project"}
 		links = append(links, bg.Link{Source: shootname, Target: projectMeta, Value: v})
-		links = append(links, bg.Link{Source: projectMeta, Target: seednames[*s.Spec.Cloud.Seed], Value: v})
+		links = append(links, bg.Link{Source: projectMeta, Target: seednames[seedName], Value: v})
 	}
 	data, err := json.MarshalIndent(bg.Graph{Nodes: r.values(nodes), Links: &links}, "", "	")
 	if err != nil {

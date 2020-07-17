@@ -16,8 +16,8 @@ package gardener
 import (
 	"fmt"
 
-	"github.com/gardener/gardener/pkg/apis/garden/v1beta1"
-	garden "github.com/gardener/gardener/pkg/client/garden/clientset/versioned"
+	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
+	garden "github.com/gardener/gardener/pkg/client/core/clientset/versioned"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/version"
 	restclient "k8s.io/client-go/rest"
@@ -64,7 +64,7 @@ func (g *gardener) GetVersion() string {
 }
 
 func (g *gardener) GetShootList() (*v1beta1.ShootList, error) {
-	shootlist, err := g.clientset.GardenV1beta1().Shoots("").List(metav1.ListOptions{})
+	shootlist, err := g.clientset.CoreV1beta1().Shoots("").List(metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get shootlist: %s", err)
 	}
@@ -80,7 +80,7 @@ func (g *gardener) GetShoots() (*[]v1beta1.Shoot, error) {
 }
 
 func (g *gardener) GetSeedList() (*v1beta1.SeedList, error) {
-	seedlist, err := g.clientset.GardenV1beta1().Seeds().List(metav1.ListOptions{})
+	seedlist, err := g.clientset.CoreV1beta1().Seeds().List(metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get seedlist: %s", err)
 	}

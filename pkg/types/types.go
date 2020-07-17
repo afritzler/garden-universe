@@ -24,7 +24,7 @@ type Node struct {
 	Name         string `json:"name"`
 	Type         string `json:"type"`
 	Status       string `json:"status,omitempty"`
-	Size         int    `json:"size,omitempty"`
+	Size         int32  `json:"size,omitempty"`
 	Region       string `json:"region"`
 	Availability bool   `json:"availability,omitempty"`
 }
@@ -36,6 +36,6 @@ type Link struct {
 }
 
 type Stats struct {
-	NoOfShoots int `json:noofshoots`
-	NoOfNodes  int `json:noofnodes`
+	NoOfShoots int 	 `json:noofshoots`
+	NoOfNodes  int32 `json:noofnodes`
 }

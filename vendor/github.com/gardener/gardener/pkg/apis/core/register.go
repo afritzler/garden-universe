@@ -45,12 +45,30 @@ var (
 // Adds the list of known types to the given scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
+		&BackupBucket{},
+		&BackupBucketList{},
+		&BackupEntry{},
+		&BackupEntryList{},
+		&CloudProfile{},
+		&CloudProfileList{},
 		&ControllerRegistration{},
 		&ControllerRegistrationList{},
 		&ControllerInstallation{},
 		&ControllerInstallationList{},
 		&Plant{},
 		&PlantList{},
+		&Project{},
+		&ProjectList{},
+		&Quota{},
+		&QuotaList{},
+		&SecretBinding{},
+		&SecretBindingList{},
+		&Seed{},
+		&SeedList{},
+		&ShootState{},
+		&ShootStateList{},
+		&Shoot{},
+		&ShootList{},
 	)
 	return nil
 }

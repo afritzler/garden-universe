@@ -14,29 +14,41 @@
 
 package core
 
-import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+import (
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
 
 // ErrorCode is a string alias.
 type ErrorCode string
 
 const (
-	// ErrorInfraUnauthorized indicates that the last error occurred due to invalid cloud provider credentials.
+	// ErrorInfraUnauthorized indicates that the last error occurred due to invalid infrastructure credentials.
 	ErrorInfraUnauthorized ErrorCode = "ERR_INFRA_UNAUTHORIZED"
-	// ErrorInfraInsufficientPrivileges indicates that the last error occurred due to insufficient cloud provider privileges.
+	// ErrorInfraInsufficientPrivileges indicates that the last error occurred due to insufficient infrastructure privileges.
 	ErrorInfraInsufficientPrivileges ErrorCode = "ERR_INFRA_INSUFFICIENT_PRIVILEGES"
-	// ErrorInfraQuotaExceeded indicates that the last error occurred due to cloud provider quota limits.
+	// ErrorInfraQuotaExceeded indicates that the last error occurred due to infrastructure quota limits.
 	ErrorInfraQuotaExceeded ErrorCode = "ERR_INFRA_QUOTA_EXCEEDED"
-	// ErrorInfraDependencies indicates that the last error occurred due to dependent objects on the cloud provider level.
+	// ErrorInfraDependencies indicates that the last error occurred due to dependent objects on the infrastructure level.
 	ErrorInfraDependencies ErrorCode = "ERR_INFRA_DEPENDENCIES"
+	// ErrorInfraResourcesDepleted indicates that the last error occurred due to depleted resource in the infrastructure.
+	ErrorInfraResourcesDepleted ErrorCode = "ERR_INFRA_RESOURCES_DEPLETED"
+	// ErrorCleanupClusterResources indicates that the last error occurred due to resources in the cluster are stuck in deletion.
+	ErrorCleanupClusterResources ErrorCode = "ERR_CLEANUP_CLUSTER_RESOURCES"
+	// ErrorConfigurationProblem indicates that the last error occurred due a configuration problem.
+	ErrorConfigurationProblem ErrorCode = "ERR_CONFIGURATION_PROBLEM"
 )
 
 // LastError indicates the last occurred error for an operation on a resource.
 type LastError struct {
 	// A human readable message indicating details about the last error.
 	Description string
+	// ID of the task which caused this last error
+	TaskID *string
 	// Well-defined error codes of the last error(s).
 	// +optional
 	Codes []ErrorCode
+	// Last time the error was reported
+	LastUpdateTime *metav1.Time
 }
 
 // LastOperationType is a string alias.
@@ -47,6 +59,8 @@ const (
 	LastOperationTypeReconcile LastOperationType = "Reconcile"
 	// LastOperationTypeDelete indicates a 'delete' operation.
 	LastOperationTypeDelete LastOperationType = "Delete"
+	// LastOperationTypeRestore indicates a 'restore' operation.
+	LastOperationTypeRestore LastOperationType = "Restore"
 )
 
 // LastOperationState is a string alias.
@@ -75,9 +89,25 @@ type LastOperation struct {
 	// Last time the operation state transitioned from one to another.
 	LastUpdateTime metav1.Time
 	// The progress in percentage (0-100) of the last operation.
-	Progress int
+	Progress int32
 	// Status of the last operation, one of Aborted, Processing, Succeeded, Error, Failed.
 	State LastOperationState
 	// Type of the last operation, one of Create, Reconcile, Delete.
 	Type LastOperationType
 }
+
+// Gardener holds the information about the Gardener.
+type Gardener struct {
+	// ID is the Docker container id of the Gardener which last acted on a Shoot cluster.
+	ID string
+	// Name is the hostname (pod name) of the Gardener which last acted on a Shoot cluster.
+	Name string
+	// Version is the version of the Gardener which last acted on a Shoot cluster.
+	Version string
+}
+
+const (
+	// GardenerName is the value in a Garden resource's `.metadata.finalizers[]` array on which the Gardener will react
+	// when performing a delete request on a resource.
+	GardenerName = "gardener"
+)

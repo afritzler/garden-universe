@@ -19,7 +19,7 @@ import (
 
 	"github.com/afritzler/garden-universe/pkg/gardener"
 	bg "github.com/afritzler/garden-universe/pkg/types"
-	"github.com/gardener/gardener/pkg/apis/garden/v1beta1"
+	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
 )
 
 type Stats interface {
@@ -40,7 +40,7 @@ func (s *stats) GetStats() (*bg.Stats, error) {
 	if err != nil {
 		return nil, err
 	}
-	noOfNodes := 0
+	var noOfNodes int32
 	for _, shoot := range shoots.Items {
 		noOfNodes += GetSizeOfShoot(shoot)
 	}
@@ -59,27 +59,10 @@ func (s *stats) GetStatsJSON() ([]byte, error) {
 	return json, nil
 }
 
-func GetSizeOfShoot(shoot v1beta1.Shoot) int {
-	size := 0
-	if shoot.Spec.Cloud.OpenStack != nil {
-		for _, w := range shoot.Spec.Cloud.OpenStack.Workers {
-			size += w.AutoScalerMax
-		}
-	}
-	if shoot.Spec.Cloud.AWS != nil {
-		for _, w := range shoot.Spec.Cloud.AWS.Workers {
-			size += w.AutoScalerMax
-		}
-	}
-	if shoot.Spec.Cloud.Azure != nil {
-		for _, w := range shoot.Spec.Cloud.Azure.Workers {
-			size += w.AutoScalerMax
-		}
-	}
-	if shoot.Spec.Cloud.GCP != nil {
-		for _, w := range shoot.Spec.Cloud.GCP.Workers {
-			size += w.AutoScalerMax
-		}
+func GetSizeOfShoot(shoot v1beta1.Shoot) int32 {
+	var size int32
+	for _, w := range shoot.Spec.Provider.Workers {
+		size += w.Maximum
 	}
 	return size
 }

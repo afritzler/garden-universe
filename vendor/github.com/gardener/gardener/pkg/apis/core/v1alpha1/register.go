@@ -38,7 +38,7 @@ func Resource(resource string) schema.GroupResource {
 
 var (
 	// SchemeBuilder is a new Scheme Builder which registers our API.
-	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes, addDefaultingFuncs)
+	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes, addDefaultingFuncs, addConversionFuncs)
 	localSchemeBuilder = &SchemeBuilder
 	// AddToScheme is a reference to the Scheme Builder's AddToScheme function.
 	AddToScheme = SchemeBuilder.AddToScheme
@@ -47,12 +47,30 @@ var (
 // Adds the list of known types to the given scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
+		&BackupBucket{},
+		&BackupBucketList{},
+		&BackupEntry{},
+		&BackupEntryList{},
+		&CloudProfile{},
+		&CloudProfileList{},
 		&ControllerRegistration{},
 		&ControllerRegistrationList{},
 		&ControllerInstallation{},
 		&ControllerInstallationList{},
 		&Plant{},
 		&PlantList{},
+		&Project{},
+		&ProjectList{},
+		&Quota{},
+		&QuotaList{},
+		&SecretBinding{},
+		&SecretBindingList{},
+		&Seed{},
+		&SeedList{},
+		&ShootState{},
+		&ShootStateList{},
+		&Shoot{},
+		&ShootList{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

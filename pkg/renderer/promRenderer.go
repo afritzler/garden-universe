@@ -94,7 +94,7 @@ func (r *promrenderer) GetGraph() ([]byte, error) {
 	for _, shoot := range nodeVector {
 		shootname := fmt.Sprintf("%s/%s", string(shoot.Metric["project"]), string(shoot.Metric["name"]))
 		if node, exists := nodes[shootname]; exists {
-			node.Size = int(shoot.Value)
+			node.Size = int32(shoot.Value)
 		} else {
 			fmt.Printf("found node info for non existent shoot %s\n", shootname)
 		}
