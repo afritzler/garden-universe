@@ -17,7 +17,7 @@ build: build-web
 		@CGO_ENABLED=0 GO111MODULE=on $(GOBUILD) -o $(BINARY_NAME) -v
 
 .PHONY: test
-test:
+test: deps
 		$(GOTEST) -v ./...
 
 .PHONY: clean
@@ -34,13 +34,13 @@ run:
 		$(GOBUILD) -o $(BINARY_NAME) -v ./...
 		./$(BINARY_NAME)
 
-.PHONY: dep
+.PHONY: deps
 deps:
 		$(GOGET) -u github.com/rakyll/statik
 
 .PHONY: build-web
-build-web:
-		statik -src=$(PWD)/web/
+build-web: deps
+		statik -f -src=$(PWD)/web/
 
 .PHONY: revendor
 revendor:
@@ -66,3 +66,4 @@ build-win: build-web
 .PHONY: docker-build
 docker-build:
 		docker build -t $(IMAGE):$(TAG) .
+
