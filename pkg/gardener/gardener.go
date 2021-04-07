@@ -14,6 +14,7 @@
 package gardener
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
@@ -64,7 +65,7 @@ func (g *gardener) GetVersion() string {
 }
 
 func (g *gardener) GetShootList() (*v1beta1.ShootList, error) {
-	shootlist, err := g.clientset.CoreV1beta1().Shoots("").List(metav1.ListOptions{})
+	shootlist, err := g.clientset.CoreV1beta1().Shoots("").List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get shootlist: %s", err)
 	}
@@ -80,7 +81,7 @@ func (g *gardener) GetShoots() (*[]v1beta1.Shoot, error) {
 }
 
 func (g *gardener) GetSeedList() (*v1beta1.SeedList, error) {
-	seedlist, err := g.clientset.CoreV1beta1().Seeds().List(metav1.ListOptions{})
+	seedlist, err := g.clientset.CoreV1beta1().Seeds().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get seedlist: %s", err)
 	}
