@@ -1,4 +1,4 @@
-FROM golang:1.13.0 AS builder
+FROM golang:1.16.3 AS builder
 WORKDIR /go/src/github.com/afritzler/garden-universe
 RUN go get github.com/rakyll/statik
 COPY . .
