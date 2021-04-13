@@ -5,7 +5,7 @@ go 1.16
 replace k8s.io/client-go => k8s.io/client-go v0.20.5
 
 require (
-	github.com/gardener/gardener v1.20.1
+	github.com/gardener/gardener v1.20.2
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.10.0
 	github.com/prometheus/common v0.20.0
