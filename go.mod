@@ -12,6 +12,6 @@ require (
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/viper v1.10.0
-	k8s.io/apimachinery v0.22.4
+	k8s.io/apimachinery v0.23.0
 	k8s.io/client-go v11.0.1-0.20190409021438-1a26190bd76a+incompatible
 )
