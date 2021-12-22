@@ -50,7 +50,10 @@ the landscape graph can be found under http://localhost:3000/graph.`,
 func init() {
 	rootCmd.AddCommand(serveCmd)
 	serveCmd.PersistentFlags().StringVarP(&port, "port", "p", "3000", "Port on which the server should listen")
-	viper.BindPFlag("port", serveCmd.PersistentFlags().Lookup("port"))
+	if err := viper.BindPFlag("port", serveCmd.PersistentFlags().Lookup("port")); err != nil {
+		log.Fatal(err)
+		panic("failed to initialize server")
+	}
 }
 
 func serve() {
@@ -62,7 +65,10 @@ func serve() {
 	http.Handle("/", http.FileServer(statikFS))
 	http.HandleFunc("/graph", graphResponse)
 	http.HandleFunc("/stats", statsResponse)
-	http.ListenAndServe(getPort(), nil)
+	if err := http.ListenAndServe(getPort(), nil); err != nil {
+		log.Fatal(err)
+		panic("failed to start server")
+	}
 }
 
 func statsResponse(w http.ResponseWriter, r *http.Request) {
@@ -81,7 +87,11 @@ func statsResponse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(data)
+	if _, err := w.Write(data); err != nil {
+		fmt.Printf("failed to write response: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func graphResponse(w http.ResponseWriter, r *http.Request) {
@@ -109,7 +119,11 @@ func graphPrometheusResponse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(data)
+	if _, err := w.Write(data); err != nil {
+		fmt.Printf("failed to write response: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func graphKubeResponse(w http.ResponseWriter, r *http.Request) {
@@ -134,7 +148,11 @@ func graphKubeResponse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(data)
+	if _, err := w.Write(data); err != nil {
+		fmt.Printf("failed to write response: %s", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func getPort() string {
