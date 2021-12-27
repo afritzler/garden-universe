@@ -36,6 +36,6 @@ type Link struct {
 }
 
 type Stats struct {
-	NoOfShoots int 	 `json:noofshoots`
-	NoOfNodes  int32 `json:noofnodes`
+	NoOfShoots int   `json:"noOfShoots"`
+	NoOfNodes  int32 `json:"noOfNodes"`
 }
