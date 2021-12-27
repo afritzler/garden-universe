@@ -11,7 +11,7 @@ require (
 	github.com/prometheus/common v0.32.1
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cobra v1.3.0
-	github.com/spf13/viper v1.10.0
+	github.com/spf13/viper v1.10.1
 	k8s.io/apimachinery v0.22.4
 	k8s.io/client-go v11.0.1-0.20190409021438-1a26190bd76a+incompatible
 )
@@ -42,7 +42,7 @@ require (
 	github.com/subosito/gotenv v1.2.0 // indirect
 	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
-	golang.org/x/sys v0.0.0-20211205182925-97ca703d548d // indirect
+	golang.org/x/sys v0.0.0-20211210111614-af8b64212486 // indirect
 	golang.org/x/term v0.0.0-20210220032956-6a3ed077a48d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac // indirect
