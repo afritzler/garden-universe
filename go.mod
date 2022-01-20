@@ -7,7 +7,7 @@ replace k8s.io/client-go => k8s.io/client-go v0.22.4
 require (
 	github.com/gardener/gardener v1.38.3
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/prometheus/client_golang v1.11.0
+	github.com/prometheus/client_golang v1.12.0
 	github.com/prometheus/common v0.32.1
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cobra v1.3.0
@@ -42,7 +42,7 @@ require (
 	github.com/subosito/gotenv v1.2.0 // indirect
 	golang.org/x/net v0.0.0-20211209124913-491a49abca63 // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
-	golang.org/x/sys v0.0.0-20211210111614-af8b64212486 // indirect
+	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
 	golang.org/x/term v0.0.0-20210220032956-6a3ed077a48d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac // indirect
