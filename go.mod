@@ -2,7 +2,7 @@ module github.com/afritzler/garden-universe
 
 go 1.17
 
-replace k8s.io/client-go => k8s.io/client-go v0.22.4
+replace k8s.io/client-go => k8s.io/client-go v0.23.4
 
 require (
 	github.com/gardener/gardener v1.41.2
@@ -52,7 +52,7 @@ require (
 	gopkg.in/ini.v1 v1.66.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
-	k8s.io/api v0.23.3 // indirect
+	k8s.io/api v0.23.4 // indirect
 	k8s.io/klog/v2 v2.30.0 // indirect
 	k8s.io/utils v0.0.0-20211116205334-6203023598ed // indirect
 	sigs.k8s.io/json v0.0.0-20211020170558-c049b76a60c6 // indirect
