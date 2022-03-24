@@ -1,69 +1,52 @@
-GOCMD=go
-GOBUILD=$(GOCMD) build
-GOCLEAN=$(GOCMD) clean
-GOTEST=$(GOCMD) test
-GOGET=$(GOCMD) get
 BINARY_NAME=garden-universe
-BINARY_LINUX=$(BINARY_NAME)_linux_amd64
-BINARY_DARWIN=$(BINARY_NAME)_darwin_amd64
-BINARY_WIN=$(BINARY_NAME)_win_amd64.exe
-IMAGE=afritzler/garden-universe
-TAG=latest
 
-all: test build
+# Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
+ifeq (,$(shell go env GOBIN))
+GOBIN=$(shell go env GOPATH)/bin
+else
+GOBIN=$(shell go env GOBIN)
+endif
+
+# Image URL to use all building/pushing image targets
+IMG ?= garden-universe:latest
+
+# Setting SHELL to bash allows bash commands to be executed by recipes.
+# This is a requirement for 'setup-envtest.sh' in the test target.
+# Options are set to exit when a recipe line exits non-zero or a piped command fails.
+SHELL = /usr/bin/env bash -o pipefail
+.SHELLFLAGS = -ec
+
+help: ## Display this help.
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+all: test build ## Test and build.
 
 .PHONY: build
-build: build-web
-		@CGO_ENABLED=0 GO111MODULE=on $(GOBUILD) -o $(BINARY_NAME) -v
+build: build-web ## Build binary.
+		go build -o $(BINARY_NAME) -v
 
 .PHONY: test
-test: deps
-		$(GOTEST) -v ./...
+test: deps ## Run tests.
+		go test -v ./...
 
 .PHONY: clean
-clean:
-		$(GOCLEAN)
+clean: ## Remove build artefacts.
+		go clean
 		rm -f $(BINARY_NAME)
-		rm -f $(BINARY_LINUX)
-		rm -f $(BINARY_DARWIN)
-		rm -f $(BINARY_WIN)
-
 
 .PHONY: run
-run:
-		$(GOBUILD) -o $(BINARY_NAME) -v ./...
+run: ## Run locally.
+		go run -o $(BINARY_NAME) -v ./...
 		./$(BINARY_NAME)
 
 .PHONY: deps
-deps:
-		$(GOGET) -u github.com/rakyll/statik
+deps: ## Get dependencies.
+		go get -u github.com/rakyll/statik
 
 .PHONY: build-web
-build-web: deps
+build-web: deps ## Regenerate web content.
 		statik -f -src=$(PWD)/web/
 
-.PHONY: revendor
-revendor:
-		@GO111MODULE=on go mod vendor
-		@GO111MODULE=on go mod tidy
-
-# Cross compilation
-.PHONY: build-linux
-cross: build-linux build-darwin build-win
-
-.PHONY: build-linux
-build-linux: build-web
-		@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on $(GOBUILD) -o $(BINARY_LINUX) -v
-
-.PHONY: build-darwin
-build-darwin: build-web
-		@CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 GO111MODULE=on $(GOBUILD) -o $(BINARY_DARWIN) -v
-
-.PHONY: build-win
-build-win: build-web
-		@CGO_ENABLED=0 GOOS=windows GOARCH=amd64 GO111MODULE=on $(GOBUILD) -o $(BINARY_WIN) -v
-
 .PHONY: docker-build
-docker-build:
-		docker build -t $(IMAGE):$(TAG) .
-
+docker-build: ## Build docker image.
+		docker build -t ${IMG} .
