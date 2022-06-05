@@ -5,7 +5,7 @@ go 1.17
 replace k8s.io/client-go => k8s.io/client-go v0.23.4
 
 require (
-	github.com/gardener/gardener v1.47.0
+	github.com/gardener/gardener v1.48.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.12.2
 	github.com/prometheus/common v0.34.0
@@ -20,7 +20,7 @@ require (
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/go-logr/logr v1.2.0 // indirect
+	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/gofuzz v1.1.0 // indirect
