@@ -7,7 +7,7 @@ replace k8s.io/client-go => k8s.io/client-go v0.23.4
 require (
 	github.com/gardener/gardener v1.52.2
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/prometheus/client_golang v1.12.2
+	github.com/prometheus/client_golang v1.13.0
 	github.com/prometheus/common v0.37.0
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cobra v1.5.0
@@ -47,7 +47,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220210224613-90d013bbcef8 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
