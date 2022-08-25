@@ -23,30 +23,35 @@ all: test build ## Test and build.
 
 .PHONY: build
 build: build-web ## Build binary.
-		go build -o $(BINARY_NAME) -v
+	go build -o $(BINARY_NAME) -v
+
+lint: ## Run golangci-lint against code.
+	golangci-lint run ./...
+
+check: lint test
 
 .PHONY: test
 test: deps ## Run tests.
-		go test -v ./...
+	go test -v ./...
 
 .PHONY: clean
 clean: ## Remove build artefacts.
-		go clean
-		rm -f $(BINARY_NAME)
+	go clean
+	rm -f $(BINARY_NAME)
 
 .PHONY: run
 run: ## Run locally.
-		go run -o $(BINARY_NAME) -v ./...
-		./$(BINARY_NAME)
+	go run -o $(BINARY_NAME) -v ./...
+	./$(BINARY_NAME)
 
 .PHONY: deps
 deps: ## Get dependencies.
-		go get -u github.com/rakyll/statik
+	go get -u github.com/rakyll/statik
 
 .PHONY: build-web
 build-web: deps ## Regenerate web content.
-		statik -f -src=$(PWD)/web/
+	statik -f -src=$(PWD)/web/
 
 .PHONY: docker-build
 docker-build: ## Build docker image.
-		docker build -t ${IMG} .
+	docker build -t ${IMG} .
