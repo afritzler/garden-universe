@@ -3,7 +3,7 @@ module github.com/afritzler/garden-universe
 go 1.19
 
 require (
-	github.com/gardener/gardener v1.68.0
+	github.com/gardener/gardener v1.69.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.14.0
 	github.com/prometheus/common v0.42.0
