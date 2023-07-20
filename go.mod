@@ -3,7 +3,7 @@ module github.com/afritzler/garden-universe
 go 1.19
 
 require (
-	github.com/gardener/gardener v1.74.1
+	github.com/gardener/gardener v1.75.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/prometheus/common v0.44.0
@@ -17,9 +17,8 @@ require (
 replace k8s.io/client-go => k8s.io/client-go v0.25.0
 
 require (
-	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/emicklei/go-restful/v3 v3.9.0 // indirect
+	github.com/emicklei/go-restful/v3 v3.10.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
