@@ -18,8 +18,8 @@ github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7
 github.com/frankban/quicktest v1.14.6 h1:7Xjx+VpznH+oBnejlPUj8oUpdxnVs4f8XU8WnHkI4W8=
 github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=
 github.com/fsnotify/fsnotify v1.7.0/go.mod h1:40Bi/Hjc2AVfZrqy+aj+yEI+/bRxZnMJyTJwOpGvigM=
-github.com/gardener/gardener v1.85.0 h1:YzEcRkZn0ktmrrtZ2dNQDQDDodZ+jsNQGCu3nrB+C0c=
-github.com/gardener/gardener v1.85.0/go.mod h1:8eHlXs2EkaghrgQwK8qEiVw3dZGpNJaq+I9IkPpReA4=
+github.com/gardener/gardener v1.86.0 h1:r0DjNZbUc2F/feWDrySZ/AU/5LAr0LoKXdraFtPb6NQ=
+github.com/gardener/gardener v1.86.0/go.mod h1:8eHlXs2EkaghrgQwK8qEiVw3dZGpNJaq+I9IkPpReA4=
 github.com/go-logr/logr v1.2.0/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbVz/1A=
 github.com/go-logr/logr v1.2.4 h1:g01GSCwiDw2xSZfjJ2/T9M+S6pFdcNtFYsp+Y43HYDQ=
 github.com/go-logr/logr v1.2.4/go.mod h1:jdQByPbusPIv2/zmleS9BjJVeZ6kBagPoEUsqbVz/1A=
