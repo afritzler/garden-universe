@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/gardener/gardener v1.86.0
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/prometheus/client_golang v1.17.0
+	github.com/prometheus/client_golang v1.18.0
 	github.com/prometheus/common v0.45.0
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cobra v1.8.0
