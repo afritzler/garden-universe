@@ -6,7 +6,7 @@ require (
 	github.com/gardener/gardener v1.88.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.18.0
-	github.com/prometheus/common v0.47.0
+	github.com/prometheus/common v0.48.0
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.18.2
