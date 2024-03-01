@@ -1,9 +1,8 @@
 module github.com/afritzler/garden-universe
 
 go 1.21
-
 require (
-	github.com/gardener/gardener v1.88.0
+	github.com/gardener/gardener v1.89.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.19.0
 	github.com/prometheus/common v0.49.0
