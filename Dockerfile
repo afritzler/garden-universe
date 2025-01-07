@@ -31,7 +31,7 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/go/pkg \
     CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GO111MODULE=on go build -ldflags="-s -w" -a -o garden-universe main.go
 
-FROM alpine:3.21.0
+FROM alpine:3.21.1
 RUN apk --no-cache add ca-certificates
 WORKDIR /
 COPY --from=builder /workspace/garden-universe .
