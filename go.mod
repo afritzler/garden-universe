@@ -1,6 +1,7 @@
 module github.com/afritzler/garden-universe
 
 go 1.22.2
+toolchain go1.23.7
 
 require (
 	github.com/gardener/gardener v1.94.1
@@ -49,11 +50,11 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
-	golang.org/x/net v0.24.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
 	golang.org/x/oauth2 v0.19.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/term v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/term v0.29.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
