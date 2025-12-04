@@ -8,7 +8,7 @@ require (
 	github.com/prometheus/client_golang v1.19.0
 	github.com/prometheus/common v0.53.0
 	github.com/rakyll/statik v0.1.7
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.18.2
 	k8s.io/apimachinery v0.30.0
 	k8s.io/client-go v0.29.4
